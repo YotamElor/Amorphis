@@ -93,9 +93,15 @@
   <ItemGroup>
     <ClCompile Include="Source\Dll.cpp" />
     <ClCompile Include="Source\Amorphis.cpp" />
+    <ClCompile Include="Source\Micro\AUnit.cpp" />
+    <ClCompile Include="Source\Micro\RangedUnit.cpp" />
+    <ClCompile Include="Source\UnitsManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Amorphis.h" />
+    <ClInclude Include="Source\Micro\AUnit.hpp" />
+    <ClInclude Include="Source\Micro\RangedUnit.hpp" />
+    <ClInclude Include="Source\UnitsManager.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

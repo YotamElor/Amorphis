@@ -1,10 +1,15 @@
 #pragma once
 #include <BWAPI.h>
+#include "UnitsManager.hpp"
 
 // Remember not to use "Broodwar" in any global class constructor!
 
-class Amorphis : public BWAPI::AIModule
+
+class AmorphisAIModule : public BWAPI::AIModule
 {
+	Amorphis::UnitsManager m_unitsManager;
+
+
 public:
   // Virtual functions for callbacks, leave these as they are.
   virtual void onStart();
