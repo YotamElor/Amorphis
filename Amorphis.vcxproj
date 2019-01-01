@@ -94,12 +94,15 @@
     <ClCompile Include="Source\Dll.cpp" />
     <ClCompile Include="Source\Amorphis.cpp" />
     <ClCompile Include="Source\Micro\AUnit.cpp" />
+    <ClCompile Include="Source\Micro\AUnitSet.cpp" />
     <ClCompile Include="Source\Micro\RangedUnit.cpp" />
     <ClCompile Include="Source\UnitsManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Amorphis.h" />
+    <ClInclude Include="Source\DisplaySettings.hpp" />
     <ClInclude Include="Source\Micro\AUnit.hpp" />
+    <ClInclude Include="Source\Micro\AUnitSet.hpp" />
     <ClInclude Include="Source\Micro\RangedUnit.hpp" />
     <ClInclude Include="Source\UnitsManager.hpp" />
   </ItemGroup>

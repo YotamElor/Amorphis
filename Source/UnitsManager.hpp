@@ -1,7 +1,7 @@
 #pragma once
 #include <BWAPI.h>
 #include <set>
-#include "Micro/AUnit.hpp"
+#include "Micro/AUnitSet.hpp"
 #include "Micro/RangedUnit.hpp"
 
 
@@ -12,8 +12,9 @@ namespace Amorphis {
 
 
 	class UnitsManager{
-		std::set<AUnit*> m_units;
+		AUnitSet m_unitSet;
 	public:
+		UnitsManager();
 		void onUnitDiscover(BWAPI::Unit unit);
 		void draw();
 	};

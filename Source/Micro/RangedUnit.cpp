@@ -11,7 +11,7 @@ namespace Amorphis {
 	}
 
 
-	void RangedUnit::draw() const
+	void RangedUnit::_displayUnitName() const
 	{
 		const Position p = m_unit->getPosition();
 		Broodwar->drawTextMap(p, "d");

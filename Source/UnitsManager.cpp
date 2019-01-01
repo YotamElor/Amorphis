@@ -2,6 +2,10 @@
 
 namespace Amorphis {
 
+	UnitsManager::UnitsManager()
+	{
+		m_unitSet = AUnitSet("dragoons", UnitTypes::Enum::Protoss_Dragoon);
+	}
 
 	void UnitsManager::onUnitDiscover(BWAPI::Unit unit) {
 		if (unit->getPlayer()->getID() != Broodwar->self()->getID()) {
@@ -10,16 +14,14 @@ namespace Amorphis {
 		Broodwar->sendText("UnitsManager::onUnitDiscover %s", unit->getType().c_str());
 		if (unit->getType() == UnitTypes::Enum::Protoss_Dragoon) {
 			RangedUnit* rangedUnit = new RangedUnit(unit);
-			m_units.insert(rangedUnit);
+			m_unitSet.insert(rangedUnit);
 		}
 	}
 
 
 	void UnitsManager::draw()
 	{
-		for (auto it = m_units.begin(); it != m_units.end(); it++) {
-			(*it)->draw();
-		}
+		m_unitSet.displayUnitNames();
 	}
 
 
