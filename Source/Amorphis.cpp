@@ -55,30 +55,30 @@ void AmorphisAIModule::onStart()
 void AmorphisAIModule::onEnd(bool isWinner)
 {
   // Called when the game ends
-  if ( isWinner )
-  {
-    // Log your win here!
-  }
+	if (isWinner)
+	{
+		// Log your win here!
+	}
 }
 
 void AmorphisAIModule::onFrame()
 {
-  // Called once every game frame
+	// Called once every game frame
 
-  // Display the game frame rate as text in the upper left area of the screen
-  Broodwar->drawTextScreen(200, 0,  "FPS: %d", Broodwar->getFPS() );
-  Broodwar->drawTextScreen(200, 20, "Average FPS: %f", Broodwar->getAverageFPS() );
-  m_unitsManager.draw();
+	// Display the game frame rate as text in the upper left area of the screen
+	Broodwar->drawTextScreen(0, 0, "FPS: %d (%.1f)", Broodwar->getFPS(), Broodwar->getAverageFPS());
+	m_unitsManager.draw();
 
-  // Return if the game is a replay or is paused
-  if ( Broodwar->isReplay() || Broodwar->isPaused() || !Broodwar->self() )
-    return;
+	// Return if the game is a replay or is paused
+	if (Broodwar->isReplay() || Broodwar->isPaused() || !Broodwar->self())
+		return;
 
-  // Prevent spamming by only running our onFrame once every number of latency frames.
-  // Latency frames are the number of frames before commands are processed.
-  if ( Broodwar->getFrameCount() % Broodwar->getLatencyFrames() != 0 )
-    return;
+	// Prevent spamming by only running our onFrame once every number of latency frames.
+	// Latency frames are the number of frames before commands are processed.
+	if (Broodwar->getFrameCount() % Broodwar->getLatencyFrames() != 0)
+		return;
 
+	m_unitsManager.onFrame();
 }
 
 void AmorphisAIModule::onSendText(std::string text)

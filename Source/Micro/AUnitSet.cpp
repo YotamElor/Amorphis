@@ -16,11 +16,42 @@ namespace Amorphis {
 	}
 
 
-	void AUnitSet::displayUnitNames() const
+	void AUnitSet::draw() const
 	{
-		for (auto it = m_units.begin(); it != m_units.end(); it++) {
-			(*it)->displayUnitName();
+		if (DisplaySettings::AUnitSetBox) {
+			Broodwar->drawBoxScreen(m_drawPositionTL, m_drawPositionBR, Color(50, 50, 50), true);
+			Broodwar->drawBoxScreen(m_drawPositionTL, m_drawPositionBR, Color(200, 200, 200), false);
+			Broodwar->drawTextScreen(m_textPosition, "%s : %s (%d)", m_name.c_str(), m_type.c_str(), m_units.size());
+		}
+		if (DisplaySettings::UnitName) {
+			for (auto it = m_units.begin(); it != m_units.end(); it++) {
+				(*it)->displayUnitName();
+			}
 		}
 	}
+
+	void AUnitSet::onFrame()
+	{
+		vector< std::set<AUnit*>::iterator > toDelete;
+		for (auto it = m_units.begin(); it != m_units.end(); it++) {
+			if (!(*it)->isAlive()) {
+				toDelete.push_back(it);
+			}
+		}
+		if (toDelete.size() > 0) {
+			for (int i = 0; i < toDelete.size(); i++) {
+				delete *toDelete[i];
+				m_units.erase(toDelete[i]);
+			}
+		}
+	}
+
+	void AUnitSet::setDrawPosition(BWAPI::Position p)
+	{
+		m_drawPositionTL = p;
+		m_drawPositionBR = p + Position(boxWidth,boxHeight);
+		m_textPosition = p + Position(2, 0);
+	}
+
 
 }

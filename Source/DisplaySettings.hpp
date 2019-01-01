@@ -8,6 +8,7 @@ namespace Amorphis {
 	public:
 		static const bool DisplayOn = true;
 		static const bool UnitName = DisplayOn && true;
+		static const bool AUnitSetBox = DisplayOn && true;
 	};
 
 

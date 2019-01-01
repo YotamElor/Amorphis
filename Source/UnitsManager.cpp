@@ -4,7 +4,8 @@ namespace Amorphis {
 
 	UnitsManager::UnitsManager()
 	{
-		m_unitSet = AUnitSet("dragoons", UnitTypes::Enum::Protoss_Dragoon);
+		m_unitSet = AUnitSet("Dragoons", UnitTypes::Enum::Protoss_Dragoon);
+		m_unitSet.setDrawPosition(Position(5, 20));
 	}
 
 	void UnitsManager::onUnitDiscover(BWAPI::Unit unit) {
@@ -19,9 +20,14 @@ namespace Amorphis {
 	}
 
 
+	void UnitsManager::onFrame()
+	{
+		m_unitSet.onFrame();
+	}
+
 	void UnitsManager::draw()
 	{
-		m_unitSet.displayUnitNames();
+		m_unitSet.draw();
 	}
 
 

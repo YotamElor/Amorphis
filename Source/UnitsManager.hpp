@@ -16,6 +16,7 @@ namespace Amorphis {
 	public:
 		UnitsManager();
 		void onUnitDiscover(BWAPI::Unit unit);
+		void onFrame();
 		void draw();
 	};
 
