@@ -95,7 +95,9 @@
     <ClCompile Include="Source\Amorphis.cpp" />
     <ClCompile Include="Source\Micro\AUnit.cpp" />
     <ClCompile Include="Source\Micro\AUnitSet.cpp" />
+    <ClCompile Include="Source\Micro\EnemyUnitSet.cpp" />
     <ClCompile Include="Source\Micro\RangedUnit.cpp" />
+    <ClCompile Include="Source\Micro\RangedUnitSet.cpp" />
     <ClCompile Include="Source\UnitsManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -103,7 +105,9 @@
     <ClInclude Include="Source\DisplaySettings.hpp" />
     <ClInclude Include="Source\Micro\AUnit.hpp" />
     <ClInclude Include="Source\Micro\AUnitSet.hpp" />
+    <ClInclude Include="Source\Micro\EnemyUnitSet.hpp" />
     <ClInclude Include="Source\Micro\RangedUnit.hpp" />
+    <ClInclude Include="Source\Micro\RangedUnitSet.hpp" />
     <ClInclude Include="Source\UnitsManager.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
