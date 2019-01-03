@@ -99,6 +99,7 @@
     <ClCompile Include="Source\Micro\RangedUnit.cpp" />
     <ClCompile Include="Source\Micro\RangedUnitSet.cpp" />
     <ClCompile Include="Source\UnitsManager.cpp" />
+    <ClCompile Include="Source\Utils\Geometry.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Amorphis.h" />
@@ -109,6 +110,7 @@
     <ClInclude Include="Source\Micro\RangedUnit.hpp" />
     <ClInclude Include="Source\Micro\RangedUnitSet.hpp" />
     <ClInclude Include="Source\UnitsManager.hpp" />
+    <ClInclude Include="Source\Utils\Geometry.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

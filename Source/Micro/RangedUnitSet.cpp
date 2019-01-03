@@ -1,4 +1,6 @@
 #include "RangedUnitSet.hpp"
+#include "../Utils/Geometry.hpp"
+
 
 using namespace BWAPI;
 using namespace std;
@@ -11,9 +13,8 @@ namespace Amorphis {
 		if (m_state == Attack) {
 			if (!m_currentTarget->exists()) {
 				if (m_enemyUnitSet->units().size() > 0) {
-					m_currentTarget = *(m_enemyUnitSet->units().begin());
-				}
-				else {
+					m_currentTarget = getClosestUnit(m_units, m_enemyUnitSet->units());
+				} else {
 					m_state = Idle;
 					m_currentTarget = NULL;
 				}
@@ -47,7 +48,14 @@ namespace Amorphis {
 	{
 		AUnitSet::draw();
 		if (DisplaySettings::AUnitSetBox) {
-			Broodwar->drawTextScreen(m_text1Position, "%s", toString(m_state));
+			Broodwar->drawTextScreen(m_textPosition, "\n%s", toString(m_state));
+		}
+		if (DisplaySettings::Target) {
+			if (m_currentTarget != NULL && m_currentTarget->exists()) {
+				Broodwar->drawCircleMap(m_currentTarget->getPosition(), 5, Color(255, 0, 0));
+				Broodwar->drawCircleMap(m_currentTarget->getPosition(), 10, Color(255, 20, 20));
+				Broodwar->drawCircleMap(m_currentTarget->getPosition(), 15, Color(255, 40, 40));
+			}
 		}
 	}
 

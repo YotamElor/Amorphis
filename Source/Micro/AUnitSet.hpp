@@ -7,13 +7,11 @@ namespace Amorphis {
 
 
 	class AUnitSet {
-		BWAPI::Position m_drawPositionTL, m_drawPositionBR, m_text0Position;
-		std::string m_name;
-
 	protected:
-		BWAPI::Position m_text1Position;
 		std::set<AUnit*> m_units;
 		BWAPI::UnitType m_type;
+		BWAPI::Position m_drawPositionTL, m_drawPositionBR, m_textPosition;
+		std::string m_name;
 
 		virtual void onFrame_() = 0;
 
