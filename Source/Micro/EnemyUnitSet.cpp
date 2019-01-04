@@ -8,13 +8,13 @@ namespace Amorphis {
 
 	void EnemyUnitSet::insert(BWAPI::Unit unit)
 	{
-		m_units.insert(unit);
+		m_units.push_back(unit);
 	}
 
 
 	void EnemyUnitSet::removeDead()
 	{
-		vector< std::set<Unit>::iterator > toDelete;
+		vector< std::vector<Unit>::iterator > toDelete;
 		for (auto it = m_units.begin(); it != m_units.end(); it++) {
 			if (!(*it)->exists()) {
 				toDelete.push_back(it);

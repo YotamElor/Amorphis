@@ -6,7 +6,7 @@
 namespace Amorphis {
 
 
-	BWAPI::Unit getClosestUnit(const std::set<AUnit*> myUnits, const std::set<BWAPI::Unit> &enemyUnits);
+	BWAPI::Unit getClosestUnit(const std::vector<AUnit*> myUnits, const std::vector<BWAPI::Unit> &enemyUnits);
 
 
 }

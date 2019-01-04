@@ -8,12 +8,12 @@ namespace Amorphis {
 
 
 	class EnemyUnitSet {
-		std::set<BWAPI::Unit> m_units;
+		std::vector<BWAPI::Unit> m_units;
 	public:
 		void insert(BWAPI::Unit unit);
 		void removeDead();
 		int size() const { return m_units.size(); }
-		const std::set<BWAPI::Unit>& units() const { return m_units;  }
+		const std::vector<BWAPI::Unit>& units() const { return m_units;  }
 	};
 
 

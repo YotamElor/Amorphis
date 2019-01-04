@@ -9,10 +9,11 @@ namespace Amorphis {
 	void AUnitSet::insert(AUnit *unit)
 	{
 		if (unit->unit()->getType() != m_type) {
-			Broodwar->sendText("ERROR: unit->unit()->getType() != m_type: ");
-			//throw(0);
+			ALOG(string("unit->unit()->getType() = ") + unit->unit()->getType().c_str());
+			ALOG(string("unit->unit()->getType() = ") + m_type.c_str());
+			AERR("ERROR:AUnitSet::insert: unit->unit()->getType() != m_type");
 		}
-		m_units.insert(unit);
+		m_units.push_back(unit);
 	}
 
 
@@ -33,7 +34,7 @@ namespace Amorphis {
 	
 	void AUnitSet::removeDead()
 	{
-		vector< std::set<AUnit*>::iterator > toDelete;
+		vector< std::vector<AUnit*>::iterator > toDelete;
 		for (auto it = m_units.begin(); it != m_units.end(); it++) {
 			if (!(*it)->isAlive()) {
 				toDelete.push_back(it);
@@ -83,8 +84,38 @@ namespace Amorphis {
 		case Idle: return "Idle"; break;
 		case Attack: return "Attack"; break;
 		case Move: return "Move"; break;
-		case Formation: return "Formation"; break;
+		case MoveFormation: return "MoveFormation"; break;
 		}
 		return "Error convert state to string";
+	}
+
+
+	void AUnitSet::moveFormation(const Formation &f)
+	{
+		if (f.positions().size() != m_units.size()) {
+			AERR("ERROR:AUnitSet::moveFormation: f.positions.size() != m_units.size()");
+		}
+		/*
+		vector< vector<int> > distancesMatrix;
+		for (auto itUnit = m_units.begin(); itUnit != m_units.end(); itUnit++) {
+			vector<int> distanceToUnit;
+			for (auto itPos = f.positions().begin(); itPos != f.positions().end(); itPos++) {
+				distanceToUnit.push_back((*itUnit)->unit()->getDistance(*itPos));
+			}
+			distancesMatrix.push_back(distanceToUnit);
+		}
+
+		vector<int> selectedPositionForUnits(m_units.size(), -1);
+		for (int i = 0; i < m_units.size(); i++) {
+			int maxMinDistance = 0, selectedUnit = -1, selectedPosition = -1;
+			int unitIdx = 0;
+			for (auto itUnit = m_units.begin(); itUnit != m_units.end(); itUnit++, unitIdx++) {
+				int minDistance = INT_MAX;
+				for (int positionIdx = 0; positionIdx < m_units.size(); positionIdx++) {
+					const int d = m_units[unitIdx]
+
+				}
+			}
+		} */
 	}
 }

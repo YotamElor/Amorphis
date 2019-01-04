@@ -1,55 +1,31 @@
 #include "Amorphis.h"
 #include <iostream>
+#include "Utils/Logger.hpp"
 
 
 using namespace BWAPI;
 using namespace Filter;
+using namespace Amorphis;
 
 
 void AmorphisAIModule::onStart()
 {
-  // Hello World!
-  Broodwar->sendText("Hello world!");
+	Logger::getInstance()->init();
+	ALOG("The map is " + Broodwar->mapName());
 
-  // Print the map name.
-  // BWAPI returns std::string when retrieving a string, don't forget to add .c_str() when printing!
-  Broodwar << "The map is " << Broodwar->mapName() << "!" << std::endl;
+	// Enable the UserInput flag, which allows us to control the bot and type messages.
+	Broodwar->enableFlag(Flag::UserInput);
 
-  // Enable the UserInput flag, which allows us to control the bot and type messages.
-  Broodwar->enableFlag(Flag::UserInput);
+	// Uncomment the following line and the bot will know about everything through the fog of war (cheat).
+	//Broodwar->enableFlag(Flag::CompleteMapInformation);
 
-  // Uncomment the following line and the bot will know about everything through the fog of war (cheat).
-  //Broodwar->enableFlag(Flag::CompleteMapInformation);
+	// Set the command optimization level so that common commands can be grouped
+	// and reduce the bot's APM (Actions Per Minute).
+	Broodwar->setCommandOptimizationLevel(2);
 
-  // Set the command optimization level so that common commands can be grouped
-  // and reduce the bot's APM (Actions Per Minute).
-  Broodwar->setCommandOptimizationLevel(2);
-
-  // Check if this is a replay
-  if ( Broodwar->isReplay() )
-  {
-
-    // Announce the players in the replay
-    Broodwar << "The following players are in this replay:" << std::endl;
-    
-    // Iterate all the players in the game using a std:: iterator
-    Playerset players = Broodwar->getPlayers();
-    for(auto p : players)
-    {
-      // Only print the player if they are not an observer
-      if ( !p->isObserver() )
-        Broodwar << p->getName() << ", playing as " << p->getRace() << std::endl;
-    }
-
-  }
-  else // if this is not a replay
-  {
-    // Retrieve you and your enemy's races. enemy() will just return the first enemy.
-    // If you wish to deal with multiple enemies then you must use enemies().
-    if ( Broodwar->enemy() ) // First make sure there is an enemy
-      Broodwar << "The matchup is " << Broodwar->self()->getRace() << " vs " << Broodwar->enemy()->getRace() << std::endl;
-  }
-
+//	if (Broodwar->enemy()) {
+//		ALOG("The matchup is " + Broodwar->self()->getRace().c_str() + " vs " + Broodwar->enemy()->getRace().c_str());
+//	}
 }
 
 void AmorphisAIModule::onEnd(bool isWinner)
