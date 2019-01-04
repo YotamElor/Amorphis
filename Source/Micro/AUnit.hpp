@@ -1,6 +1,6 @@
 #pragma once
 #include <BWAPI.h>
-#include "../DisplaySettings.hpp"
+#include "DisplaySettings.hpp"
 
 
 namespace Amorphis {
@@ -9,28 +9,31 @@ namespace Amorphis {
 	class AUnit {
 	protected:
 		BWAPI::Unit m_unit = NULL;
-		std::string m_name;
-		BWAPI::Unit m_currentTarget = NULL;
+		BWAPI::Unit m_targetUnit = NULL;
+		BWAPI::Position m_targetPosition;
 
-		AUnit(BWAPI::Unit unit) : m_unit(unit), m_name(m_unit->getType().c_str()) {}
-		virtual void displayUnitName() const;
+		AUnit(BWAPI::Unit unit) : m_unit(unit) {}
+		virtual void displayUnitName(const std::string &name) const;
+		virtual void displayTarget() const;
 
 		enum State {
 			Idle,
-			Attack
+			Attack,
+			Move
 		} m_state = Idle;
 
 		virtual const char* toString(State state) const;
 
-		virtual void onFrame_() const;
+		virtual void onFrame_();
 
 	public:
 		const BWAPI::Unit unit() const { return m_unit; }
 		bool isAlive() const { return m_unit->exists(); }
 		void onFrame() { if (isAlive()) onFrame_(); }
 
-		virtual void draw() const;
+		virtual void draw(const std::string &name) const;
 		virtual void attack(BWAPI::Unit unit);
+		virtual void move(BWAPI::Position position);
 	};
 
 

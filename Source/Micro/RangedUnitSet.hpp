@@ -19,13 +19,6 @@ namespace Amorphis {
 
 		virtual void setEnemy(EnemyUnitSet *enemyUnitSet);
 		virtual void draw() const;
-
-		enum State {
-			Idle,
-			Attack
-		} m_state = Idle;
-		virtual const char* toString(State state) const;
-		virtual State state() const { return m_state; }
 	};
 
 

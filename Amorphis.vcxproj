@@ -69,7 +69,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\BWAPI\BWAPI\Amorphis\Source;../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NOMINMAX;WIN32;NDEBUG;_WINDOWS;_USRDLL;EXAMPLEAIMODULE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -96,6 +96,7 @@
     <ClCompile Include="Source\Micro\AUnit.cpp" />
     <ClCompile Include="Source\Micro\AUnitSet.cpp" />
     <ClCompile Include="Source\Micro\EnemyUnitSet.cpp" />
+    <ClCompile Include="Source\Micro\Formation.cpp" />
     <ClCompile Include="Source\Micro\RangedUnit.cpp" />
     <ClCompile Include="Source\Micro\RangedUnitSet.cpp" />
     <ClCompile Include="Source\UnitsManager.cpp" />
@@ -107,6 +108,7 @@
     <ClInclude Include="Source\Micro\AUnit.hpp" />
     <ClInclude Include="Source\Micro\AUnitSet.hpp" />
     <ClInclude Include="Source\Micro\EnemyUnitSet.hpp" />
+    <ClInclude Include="Source\Micro\Formation.hpp" />
     <ClInclude Include="Source\Micro\RangedUnit.hpp" />
     <ClInclude Include="Source\Micro\RangedUnitSet.hpp" />
     <ClInclude Include="Source\UnitsManager.hpp" />

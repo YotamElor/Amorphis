@@ -25,7 +25,7 @@ namespace Amorphis {
 		}
 		if (DisplaySettings::UnitName) {
 			for (auto it = m_units.begin(); it != m_units.end(); it++) {
-				(*it)->draw();
+				(*it)->draw(m_name);
 			}
 		}
 	}
@@ -63,4 +63,28 @@ namespace Amorphis {
 	}
 
 
+	BWAPI::Position AUnitSet::center() const
+	{
+		BWAPI::Position sum(0, 0);
+		for (auto it = m_units.begin(); it != m_units.end(); it++) {
+			if ((*it)->isAlive()) {
+				sum += (*it)->unit()->getPosition();
+			}
+		}
+		sum /= m_units.size();
+		return sum;
+	}
+
+
+	const char * AUnitSet::toString(State state) const
+	{
+		switch (state)
+		{
+		case Idle: return "Idle"; break;
+		case Attack: return "Attack"; break;
+		case Move: return "Move"; break;
+		case Formation: return "Formation"; break;
+		}
+		return "Error convert state to string";
+	}
 }

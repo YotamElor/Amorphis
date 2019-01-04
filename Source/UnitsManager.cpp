@@ -24,7 +24,7 @@ namespace Amorphis {
 
 	void UnitsManager::onFrame()
 	{
-		if (m_unitSet.state()== RangedUnitSet::State::Idle && m_enemyUnits.size() > 0) {
+		if (m_unitSet.state() != RangedUnitSet::State::Attack && m_enemyUnits.size() > 0) {
 			m_unitSet.setEnemy(&m_enemyUnits);
 		}
 		m_unitSet.onFrame();

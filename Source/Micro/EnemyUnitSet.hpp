@@ -1,6 +1,6 @@
 #pragma once
 #include <BWAPI.h>
-#include "../DisplaySettings.hpp"
+#include "DisplaySettings.hpp"
 #include <set>
 
 

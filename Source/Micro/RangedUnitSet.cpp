@@ -1,15 +1,25 @@
 #include "RangedUnitSet.hpp"
-#include "../Utils/Geometry.hpp"
+#include "Utils/Geometry.hpp"
 
 
 using namespace BWAPI;
 using namespace std;
+
 
 namespace Amorphis {
 
 
 	void RangedUnitSet::onFrame_()
 	{
+		if (m_state == Idle && m_units.size() == 4) {
+			m_targetFormation.setLineFormation(center(), m_units.size());
+			int idx = 0;
+			for (auto it = m_units.begin(); it != m_units.end(); it++, idx++) {
+				(*it)->move(m_targetFormation.positions()[idx]);
+			}
+			m_state = Formation;
+		}
+
 		if (m_state == Attack) {
 			if (!m_currentTarget->exists()) {
 				if (m_enemyUnitSet->units().size() > 0) {
@@ -30,17 +40,6 @@ namespace Amorphis {
 		for (auto it = m_units.begin(); it != m_units.end(); it++) {
 			(*it)->onFrame();
 		}
-	}
-
-
-	const char * RangedUnitSet::toString(State state) const
-	{
-		switch (state)
-		{
-		case Idle: return "Idle"; break;
-		case Attack: return "Attack"; break;
-		}
-		return "Error convert state to string";
 	}
 
 
