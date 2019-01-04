@@ -12,7 +12,7 @@ namespace Amorphis {
 	public:
 		Formation() {}
 		void setPointFormation(BWAPI::Position center, const int numUnits);
-		void setLineFormation(BWAPI::Position center, const int numUnits);
+		void setLineFormation(BWAPI::Position center, const int numUnits, const int spacing, const double direction);
 		const std::vector<BWAPI::Position>& positions() const { return m_positions;  }
 	};
 

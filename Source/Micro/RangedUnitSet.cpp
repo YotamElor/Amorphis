@@ -12,7 +12,7 @@ namespace Amorphis {
 	void RangedUnitSet::onFrame_()
 	{
 		if (m_state == Idle && m_units.size() == 4) {
-			m_targetFormation.setLineFormation(center(), m_units.size());
+			m_targetFormation.setLineFormation(center(), m_units.size(), 50, 3.14*0.25);
 			int idx = 0;
 			for (auto it = m_units.begin(); it != m_units.end(); it++, idx++) {
 				(*it)->move(m_targetFormation.positions()[idx]);
