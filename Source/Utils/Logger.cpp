@@ -1,5 +1,5 @@
 #include "Logger.hpp"
-
+#include <BWAPI.h>
 
 using namespace std;
 
@@ -27,13 +27,12 @@ namespace Amorphis {
 
 	void Logger::log(const std::string &s)
 	{
-		m_ofs << s.c_str() << "\n";
+		m_ofs << "[" << BWAPI::Broodwar->getFrameCount() << "] " << s.c_str() << "\n";
 		m_ofs.flush();
 	}
 
 	void Logger::err(const std::string &s)
 	{
-		m_ofs << "ERROR: ";
 		log(s);
 		throw(0);
 	}

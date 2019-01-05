@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Source\Dll.cpp" />
+    <ClCompile Include="Source\Amorphis.cpp" />
+    <ClCompile Include="Source\UnitsManager.cpp" />
+    <ClCompile Include="Source\bwem\area.cpp">
+      <Filter>bwem</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\bwem\base.cpp">
+      <Filter>bwem</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\bwem\bwapiExt.cpp">
+      <Filter>bwem</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\bwem\bwem.cpp">
+      <Filter>bwem</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\bwem\cp.cpp">
+      <Filter>bwem</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\bwem\examples.cpp">
+      <Filter>bwem</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\bwem\exampleWall.cpp">
+      <Filter>bwem</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\bwem\graph.cpp">
+      <Filter>bwem</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\bwem\gridMap.cpp">
+      <Filter>bwem</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\bwem\map.cpp">
+      <Filter>bwem</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\bwem\mapDrawer.cpp">
+      <Filter>bwem</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\bwem\mapImpl.cpp">
+      <Filter>bwem</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\bwem\mapPrinter.cpp">
+      <Filter>bwem</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\bwem\neutral.cpp">
+      <Filter>bwem</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\bwem\tiles.cpp">
+      <Filter>bwem</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\bwem\utils.cpp">
+      <Filter>bwem</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\bwem\winutils.cpp">
+      <Filter>bwem</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Micro\AUnit.cpp">
+      <Filter>Micro</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Micro\AUnitSet.cpp">
+      <Filter>Micro</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Micro\EnemyUnitSet.cpp">
+      <Filter>Micro</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Micro\Formation.cpp">
+      <Filter>Micro</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Micro\RangedUnit.cpp">
+      <Filter>Micro</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Micro\RangedUnitSet.cpp">
+      <Filter>Micro</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utils\Geometry.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utils\Logger.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Amorphis.h" />
+    <ClInclude Include="Source\DisplaySettings.hpp" />
+    <ClInclude Include="Source\UnitsManager.hpp" />
+    <ClInclude Include="Source\bwem\area.h">
+      <Filter>bwem</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\bwem\base.h">
+      <Filter>bwem</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\bwem\bwapiExt.h">
+      <Filter>bwem</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\bwem\bwem.h">
+      <Filter>bwem</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\bwem\cp.h">
+      <Filter>bwem</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\bwem\defs.h">
+      <Filter>bwem</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\bwem\examples.h">
+      <Filter>bwem</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\bwem\exampleWall.h">
+      <Filter>bwem</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\bwem\graph.h">
+      <Filter>bwem</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\bwem\gridMap.h">
+      <Filter>bwem</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\bwem\map.h">
+      <Filter>bwem</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\bwem\mapDrawer.h">
+      <Filter>bwem</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\bwem\mapImpl.h">
+      <Filter>bwem</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\bwem\mapPrinter.h">
+      <Filter>bwem</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\bwem\neutral.h">
+      <Filter>bwem</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\bwem\tiles.h">
+      <Filter>bwem</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\bwem\utils.h">
+      <Filter>bwem</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\bwem\winutils.h">
+      <Filter>bwem</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Micro\AUnit.hpp">
+      <Filter>Micro</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Micro\AUnitSet.hpp">
+      <Filter>Micro</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Micro\EnemyUnitSet.hpp">
+      <Filter>Micro</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Micro\Formation.hpp">
+      <Filter>Micro</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Micro\RangedUnit.hpp">
+      <Filter>Micro</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Micro\RangedUnitSet.hpp">
+      <Filter>Micro</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utils\Geometry.hpp">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utils\Logger.hpp">
+      <Filter>Utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="bwem">
+      <UniqueIdentifier>{b852c7fb-1ab8-4365-b78e-85c21ada4755}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Micro">
+      <UniqueIdentifier>{81a9b0b4-f67f-4dab-8767-d0d53377ad37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{9b028b2c-653a-4428-9fab-f920abb48fa7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

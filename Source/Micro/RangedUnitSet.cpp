@@ -11,14 +11,8 @@ namespace Amorphis {
 
 	void RangedUnitSet::onFrame_()
 	{
-		if (m_state == Idle && m_units.size() == 4) {
-			Formation f;
-			f.setLineFormation(center(), m_units.size(), 50, 3.14*0.25);
-			moveFormation(f);
-		}
-
 		if (m_state == Attack) {
-			if (!m_currentTarget->exists()) {
+			if (m_currentTarget==NULL || !m_currentTarget->exists()) {
 				if (m_enemyUnitSet->units().size() > 0) {
 					m_currentTarget = getClosestUnit(m_units, m_enemyUnitSet->units());
 				} else {

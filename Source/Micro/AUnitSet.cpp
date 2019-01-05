@@ -34,16 +34,9 @@ namespace Amorphis {
 	
 	void AUnitSet::removeDead()
 	{
-		vector< std::vector<AUnit*>::iterator > toDelete;
-		for (auto it = m_units.begin(); it != m_units.end(); it++) {
-			if (!(*it)->isAlive()) {
-				toDelete.push_back(it);
-			}
-		}
-		if (toDelete.size() > 0) {
-			for (int i = 0; i < (int)toDelete.size(); i++) {
-				delete *toDelete[i];
-				m_units.erase(toDelete[i]);
+		for (int i = m_units.size() - 1; i >= 0; i--) {
+			if (!m_units[i]->isAlive()) {
+				m_units.erase(m_units.begin() + i);
 			}
 		}
 	}
@@ -95,7 +88,7 @@ namespace Amorphis {
 		if (f.positions().size() != m_units.size()) {
 			AERR("ERROR:AUnitSet::moveFormation: f.positions.size() != m_units.size()");
 		}
-		/*
+
 		vector< vector<int> > distancesMatrix;
 		for (auto itUnit = m_units.begin(); itUnit != m_units.end(); itUnit++) {
 			vector<int> distanceToUnit;
@@ -105,17 +98,34 @@ namespace Amorphis {
 			distancesMatrix.push_back(distanceToUnit);
 		}
 
-		vector<int> selectedPositionForUnits(m_units.size(), -1);
 		for (int i = 0; i < m_units.size(); i++) {
-			int maxMinDistance = 0, selectedUnit = -1, selectedPosition = -1;
-			int unitIdx = 0;
-			for (auto itUnit = m_units.begin(); itUnit != m_units.end(); itUnit++, unitIdx++) {
+			int maxMinDistance = -1, selectedUnit = -1, selectedPosition = -1;
+			for (int unitIdx = 0; unitIdx < m_units.size(); unitIdx++) {
 				int minDistance = INT_MAX;
+				int minDistancePosIdx = -1;
 				for (int positionIdx = 0; positionIdx < m_units.size(); positionIdx++) {
-					const int d = m_units[unitIdx]
-
+					const int d = distancesMatrix[unitIdx][positionIdx];
+					//ALOG(to_string(unitIdx) + string(" ") + to_string(positionIdx) + string(" ") + to_string(d));
+					if (d < minDistance) {
+						minDistance = d;
+						minDistancePosIdx = positionIdx;
+					}
+				}
+				if (minDistance > maxMinDistance) {
+					maxMinDistance = minDistance;
+					selectedUnit = unitIdx;
+					selectedPosition = minDistancePosIdx;
 				}
 			}
-		} */
+			//ALOG(string("selectedUnit = ")+std::to_string(selectedUnit));
+			//ALOG(string("selectedPosition = ") + std::to_string(selectedPosition));
+			m_units[selectedUnit]->move(f.positions()[selectedPosition]);
+			for (int j = 0; j < m_units.size(); j++) {
+				distancesMatrix[j][selectedPosition] = INT_MAX;
+				distancesMatrix[selectedUnit][j] = INT_MAX;
+			}
+			distancesMatrix[selectedUnit][selectedPosition] = -1;
+		}
+		m_state = MoveFormation;
 	}
 }

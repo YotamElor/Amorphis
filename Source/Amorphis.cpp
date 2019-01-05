@@ -1,11 +1,13 @@
 #include "Amorphis.h"
 #include <iostream>
 #include "Utils/Logger.hpp"
+#include "bwem/bwem.h"
 
 
 using namespace BWAPI;
 using namespace Filter;
 using namespace Amorphis;
+namespace { auto & theMap = BWEM::Map::Instance(); }
 
 
 void AmorphisAIModule::onStart()
@@ -103,6 +105,7 @@ void AmorphisAIModule::onNukeDetect(BWAPI::Position target)
 void AmorphisAIModule::onUnitDiscover(BWAPI::Unit unit)
 {
 	m_unitsManager.onUnitDiscover(unit);
+	ALOG(unit->getType().toString());
 }
 
 void AmorphisAIModule::onUnitEvade(BWAPI::Unit unit)
@@ -128,17 +131,6 @@ void AmorphisAIModule::onUnitDestroy(BWAPI::Unit unit)
 
 void AmorphisAIModule::onUnitMorph(BWAPI::Unit unit)
 {
-  if ( Broodwar->isReplay() )
-  {
-    // if we are in a replay, then we will print out the build order of the structures
-    if ( unit->getType().isBuilding() && !unit->getPlayer()->isNeutral() )
-    {
-      int seconds = Broodwar->getFrameCount()/24;
-      int minutes = seconds/60;
-      seconds %= 60;
-      Broodwar->sendText("%.2d:%.2d: %s morphs a %s", minutes, seconds, unit->getPlayer()->getName().c_str(), unit->getType().c_str());
-    }
-  }
 }
 
 void AmorphisAIModule::onUnitRenegade(BWAPI::Unit unit)

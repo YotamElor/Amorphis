@@ -91,6 +91,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\bwem\area.cpp" />
+    <ClCompile Include="Source\bwem\base.cpp" />
+    <ClCompile Include="Source\bwem\bwapiExt.cpp" />
+    <ClCompile Include="Source\bwem\bwem.cpp" />
+    <ClCompile Include="Source\bwem\cp.cpp" />
+    <ClCompile Include="Source\bwem\examples.cpp" />
+    <ClCompile Include="Source\bwem\exampleWall.cpp" />
+    <ClCompile Include="Source\bwem\graph.cpp" />
+    <ClCompile Include="Source\bwem\gridMap.cpp" />
+    <ClCompile Include="Source\bwem\map.cpp" />
+    <ClCompile Include="Source\bwem\mapDrawer.cpp" />
+    <ClCompile Include="Source\bwem\mapImpl.cpp" />
+    <ClCompile Include="Source\bwem\mapPrinter.cpp" />
+    <ClCompile Include="Source\bwem\neutral.cpp" />
+    <ClCompile Include="Source\bwem\tiles.cpp" />
+    <ClCompile Include="Source\bwem\utils.cpp" />
+    <ClCompile Include="Source\bwem\winutils.cpp" />
     <ClCompile Include="Source\Dll.cpp" />
     <ClCompile Include="Source\Amorphis.cpp" />
     <ClCompile Include="Source\Micro\AUnit.cpp" />
@@ -105,6 +122,24 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Amorphis.h" />
+    <ClInclude Include="Source\bwem\area.h" />
+    <ClInclude Include="Source\bwem\base.h" />
+    <ClInclude Include="Source\bwem\bwapiExt.h" />
+    <ClInclude Include="Source\bwem\bwem.h" />
+    <ClInclude Include="Source\bwem\cp.h" />
+    <ClInclude Include="Source\bwem\defs.h" />
+    <ClInclude Include="Source\bwem\examples.h" />
+    <ClInclude Include="Source\bwem\exampleWall.h" />
+    <ClInclude Include="Source\bwem\graph.h" />
+    <ClInclude Include="Source\bwem\gridMap.h" />
+    <ClInclude Include="Source\bwem\map.h" />
+    <ClInclude Include="Source\bwem\mapDrawer.h" />
+    <ClInclude Include="Source\bwem\mapImpl.h" />
+    <ClInclude Include="Source\bwem\mapPrinter.h" />
+    <ClInclude Include="Source\bwem\neutral.h" />
+    <ClInclude Include="Source\bwem\tiles.h" />
+    <ClInclude Include="Source\bwem\utils.h" />
+    <ClInclude Include="Source\bwem\winutils.h" />
     <ClInclude Include="Source\DisplaySettings.hpp" />
     <ClInclude Include="Source\Micro\AUnit.hpp" />
     <ClInclude Include="Source\Micro\AUnitSet.hpp" />

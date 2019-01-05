@@ -1,7 +1,10 @@
 #include "EnemyUnitSet.hpp"
+#include "Utils/Logger.hpp"
+
 
 using namespace BWAPI;
 using namespace std;
+
 
 namespace Amorphis {
 
@@ -14,15 +17,11 @@ namespace Amorphis {
 
 	void EnemyUnitSet::removeDead()
 	{
-		vector< std::vector<Unit>::iterator > toDelete;
-		for (auto it = m_units.begin(); it != m_units.end(); it++) {
-			if (!(*it)->exists()) {
-				toDelete.push_back(it);
-			}
-		}
-		if (toDelete.size() > 0) {
-			for (int i = 0; i < (int)toDelete.size(); i++) {
-				m_units.erase(toDelete[i]);
+		for (int i = m_units.size() - 1; i >= 0; i--) {
+			if (!m_units[i]->exists()) {
+				ALOG(string("removing ") + to_string(i));
+				m_units.erase(m_units.begin() + i);
+				ALOG(string("removing ") + to_string(i) + string(" done"));
 			}
 		}
 	}
