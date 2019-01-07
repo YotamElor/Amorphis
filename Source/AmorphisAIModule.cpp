@@ -17,11 +17,12 @@ void AmorphisAIModule::onStart()
 	ALOG("The map is " + Broodwar->mapName());
 
 	Broodwar << "Map initialization..." << std::endl;
+	amorphisMain = new Amorphis::AmorphisMain();
 
-//	theMap.Initialize();
-//	theMap.EnableAutomaticPathAnalysis();
-//	bool startingLocationsOK = theMap.FindBasesForStartingLocations();
-//	assert(startingLocationsOK);
+	theMap.Initialize();
+	theMap.EnableAutomaticPathAnalysis();
+	bool startingLocationsOK = theMap.FindBasesForStartingLocations();
+	assert(startingLocationsOK);
 
 	// Enable the UserInput flag, which allows us to control the bot and type messages.
 	Broodwar->enableFlag(Flag::UserInput);
@@ -32,7 +33,6 @@ void AmorphisAIModule::onStart()
 	// Set the command optimization level so that common commands can be grouped
 	// and reduce the bot's APM (Actions Per Minute).
 	Broodwar->setCommandOptimizationLevel(2);
-	amorphisMain.init();
 
 //	if (Broodwar->enemy()) {
 //		ALOG("The matchup is " + Broodwar->self()->getRace().c_str() + " vs " + Broodwar->enemy()->getRace().c_str());
@@ -56,7 +56,7 @@ void AmorphisAIModule::onFrame()
 	try
 	{
 		Broodwar->drawTextScreen(0, 0, "FPS: %d (%.1f)", Broodwar->getFPS(), Broodwar->getAverageFPS());
-		//amorphisMain.draw();
+		amorphisMain->draw();
 	}
 	catch (const std::exception & e)
 	{
@@ -69,7 +69,7 @@ void AmorphisAIModule::onFrame()
 
 	try
 	{
-		amorphisMain.onFrame();
+		amorphisMain->onFrame();
 	}
 	catch (const std::exception & e)
 	{
@@ -122,7 +122,7 @@ void AmorphisAIModule::onNukeDetect(BWAPI::Position target)
 
 void AmorphisAIModule::onUnitDiscover(BWAPI::Unit unit)
 {
-	amorphisMain.onUnitDiscover(unit);
+	amorphisMain->onUnitDiscover(unit);
 }
 
 void AmorphisAIModule::onUnitEvade(BWAPI::Unit unit)

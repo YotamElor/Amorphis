@@ -13,7 +13,11 @@ namespace Amorphis {
 			ALOG(string("unit->unit()->getType() = ") + m_type.c_str());
 			AERR("ERROR:AUnitSet::insert: unit->unit()->getType() != m_type");
 		}
+		if (unit->unitSet() != NULL) {
+			AERR(string("unit->unitSet() = ") + unit->unitSet()->name());
+		}
 		m_units.push_back(unit);
+		m_units.back()->setUnitSet(this);
 	}
 
 
@@ -26,7 +30,7 @@ namespace Amorphis {
 		}
 		if (DisplaySettings::UnitName) {
 			for (auto it = m_units.begin(); it != m_units.end(); it++) {
-				(*it)->draw(m_name);
+				(*it)->draw();
 			}
 		}
 	}
@@ -74,10 +78,11 @@ namespace Amorphis {
 	{
 		switch (state)
 		{
-		case Idle: return "Idle"; break;
-		case Attack: return "Attack"; break;
-		case Move: return "Move"; break;
-		case MoveFormation: return "MoveFormation"; break;
+		case Idle: return "(I)"; break;
+		case Attack: return "(A)"; break;
+		case Move: return "(M)"; break;
+		case MoveFormation: return "(MF)"; break;
+		case Gather: return "(G)"; break;
 		}
 		return "Error convert state to string";
 	}
@@ -98,12 +103,12 @@ namespace Amorphis {
 			distancesMatrix.push_back(distanceToUnit);
 		}
 
-		for (int i = 0; i < m_units.size(); i++) {
+		for (int i = 0; i < (int)m_units.size(); i++) {
 			int maxMinDistance = -1, selectedUnit = -1, selectedPosition = -1;
-			for (int unitIdx = 0; unitIdx < m_units.size(); unitIdx++) {
+			for (int unitIdx = 0; unitIdx < (int)m_units.size(); unitIdx++) {
 				int minDistance = INT_MAX;
 				int minDistancePosIdx = -1;
-				for (int positionIdx = 0; positionIdx < m_units.size(); positionIdx++) {
+				for (int positionIdx = 0; positionIdx < (int)m_units.size(); positionIdx++) {
 					const int d = distancesMatrix[unitIdx][positionIdx];
 					//ALOG(to_string(unitIdx) + string(" ") + to_string(positionIdx) + string(" ") + to_string(d));
 					if (d < minDistance) {
@@ -120,7 +125,7 @@ namespace Amorphis {
 			//ALOG(string("selectedUnit = ")+std::to_string(selectedUnit));
 			//ALOG(string("selectedPosition = ") + std::to_string(selectedPosition));
 			m_units[selectedUnit]->move(f.positions()[selectedPosition]);
-			for (int j = 0; j < m_units.size(); j++) {
+			for (int j = 0; j < (int)m_units.size(); j++) {
 				distancesMatrix[j][selectedPosition] = INT_MAX;
 				distancesMatrix[selectedUnit][j] = INT_MAX;
 			}

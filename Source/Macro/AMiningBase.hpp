@@ -1,7 +1,7 @@
 #pragma once
 #include <BWAPI.h>
-#include "Utils/DisplaySettings.hpp"
-#include "Utils/Logger.hpp"
+#include "bwem/base.h"
+#include "Micro/WorkerUnitSet.hpp"
 
 
 namespace Amorphis {
@@ -9,13 +9,16 @@ namespace Amorphis {
 
 	class AMiningBase {
 		BWAPI::Unit m_resourceDepot;
-		std::vector<BWAPI::Unit> m_minerals;
-		std::vector<BWAPI::Unit> m_gases;
+		BWEM::Base const* m_base = NULL;
+		WorkerUnitSet *m_workers;
+		std::string m_name;
 	public:
-		AMiningBase() {}
-		AMiningBase(BWAPI::Unit resourceDepot);
+		AMiningBase(const std::string &name, BWAPI::Unit resourceDepot);
 		void draw() const;
 		void onFrame();
+		void addWorker(BWAPI::Unit unit);
+		BWEM::Base const* base() const { return m_base;  }
+		void gather(int numGasWorkers);
 	};
 
 

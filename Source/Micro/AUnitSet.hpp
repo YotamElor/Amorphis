@@ -26,7 +26,8 @@ namespace Amorphis {
 			Idle,
 			Attack,
 			Move,
-			MoveFormation
+			MoveFormation,
+			Gather
 		} m_state = Idle;
 		virtual const char* toString(State state) const;
 		State state() const { return m_state; }
@@ -42,6 +43,7 @@ namespace Amorphis {
 		virtual void draw() const;
 		virtual void onFrame();
 		virtual void moveFormation(const Formation &f);
+		const std::string& name() const { return m_name; }
 	};
 
 

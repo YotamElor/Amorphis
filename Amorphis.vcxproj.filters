@@ -86,6 +86,12 @@
     </ClCompile>
     <ClCompile Include="Source\AmorphisAIModule.cpp" />
     <ClCompile Include="Source\AmorphisMain.cpp" />
+    <ClCompile Include="Source\Micro\WorkerUnitSet.cpp">
+      <Filter>Micro</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Micro\WorkerUnit.cpp">
+      <Filter>Micro</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\UnitsManager.hpp" />
@@ -178,6 +184,12 @@
     </ClInclude>
     <ClInclude Include="Source\AmorphisAIModule.h" />
     <ClInclude Include="Source\AmorphisMain.hpp" />
+    <ClInclude Include="Source\Micro\WorkerUnitSet.hpp">
+      <Filter>Micro</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Micro\WorkerUnit.hpp">
+      <Filter>Micro</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="bwem">

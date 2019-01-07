@@ -7,7 +7,7 @@
 
 class AmorphisAIModule : public BWAPI::AIModule
 {
-	Amorphis::AmorphisMain amorphisMain;
+	Amorphis::AmorphisMain *amorphisMain;
 
 
 public:

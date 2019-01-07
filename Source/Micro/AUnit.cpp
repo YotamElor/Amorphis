@@ -1,15 +1,19 @@
 #include "AUnit.hpp"
+#include "AUnitSet.hpp"
+
 
 using namespace BWAPI;
+using namespace std;
 
 
 namespace Amorphis {
 
 
-	void AUnit::displayUnitName(const std::string &name) const
+	void AUnit::displayUnitName() const
 	{
 		if (DisplaySettings::UnitName) {
 			const Position p = m_unit->getPosition();
+			const string name = (m_unitSet == NULL) ? "NULL" : m_unitSet->name();
 			Broodwar->drawTextMap(p, "%s:%s\n%s", name.c_str(), toString(m_state), m_unit->getLastCommand().getType().toString().c_str());
 		}
 	}
@@ -23,9 +27,9 @@ namespace Amorphis {
 	}
 
 
-	void AUnit::draw(const std::string &name) const
+	void AUnit::draw() const
 	{
-		displayUnitName(name);
+		displayUnitName();
 		displayTarget();
 	}
 
@@ -44,6 +48,10 @@ namespace Amorphis {
 		m_unit->move(m_targetPosition);
 	}
 
+	void AUnit::gather(BWEM::Ressource const* resource)
+	{
+	}
+
 	const char * AUnit::toString(State state) const
 	{
 		switch (state)
@@ -51,6 +59,8 @@ namespace Amorphis {
 		case Idle: return "(I)"; break;
 		case Attack: return "(A)"; break;
 		case Move: return "(M)"; break;
+		case GatherMinerals: return "(GM)"; break;
+		case GatherGas: return "(GG)"; break;
 		}
 		return "Error convert state to string";
 	}

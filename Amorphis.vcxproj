@@ -119,6 +119,8 @@
     <ClCompile Include="Source\Micro\Formation.cpp" />
     <ClCompile Include="Source\Micro\RangedUnit.cpp" />
     <ClCompile Include="Source\Micro\RangedUnitSet.cpp" />
+    <ClCompile Include="Source\Micro\WorkerUnit.cpp" />
+    <ClCompile Include="Source\Micro\WorkerUnitSet.cpp" />
     <ClCompile Include="Source\UnitsManager.cpp" />
     <ClCompile Include="Source\Utils\Geometry.cpp" />
     <ClCompile Include="Source\Utils\Logger.cpp" />
@@ -152,6 +154,8 @@
     <ClInclude Include="Source\Micro\Formation.hpp" />
     <ClInclude Include="Source\Micro\RangedUnit.hpp" />
     <ClInclude Include="Source\Micro\RangedUnitSet.hpp" />
+    <ClInclude Include="Source\Micro\WorkerUnit.hpp" />
+    <ClInclude Include="Source\Micro\WorkerUnitSet.hpp" />
     <ClInclude Include="Source\UnitsManager.hpp" />
     <ClInclude Include="Source\Utils\DisplaySettings.hpp" />
     <ClInclude Include="Source\Utils\Geometry.hpp" />

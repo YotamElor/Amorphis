@@ -11,8 +11,8 @@ namespace Amorphis {
 
 	class AmorphisMain{
 		std::vector<AMiningBase> m_miningBases;
-	public:
 		void init();
+	public:
 		void onFrame();
 		void draw() const;
 		void onUnitDiscover(BWAPI::Unit unit);
