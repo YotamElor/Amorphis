@@ -92,6 +92,9 @@
     <ClCompile Include="Source\Micro\WorkerUnit.cpp">
       <Filter>Micro</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Macro\AMineralPatch.cpp">
+      <Filter>Macro</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\UnitsManager.hpp" />
@@ -189,6 +192,9 @@
     </ClInclude>
     <ClInclude Include="Source\Micro\WorkerUnit.hpp">
       <Filter>Micro</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Macro\AMineralPatch.hpp">
+      <Filter>Macro</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -10,7 +10,7 @@ namespace Amorphis {
 
 
 	class AmorphisMain{
-		std::vector<AMiningBase> m_miningBases;
+		std::vector<AMiningBase*> m_miningBases;
 		void init();
 	public:
 		void onFrame();

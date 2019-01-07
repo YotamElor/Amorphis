@@ -41,24 +41,65 @@ namespace Amorphis {
 		}
 		m_workers = new WorkerUnitSet(m_name, type);
 		m_workers->setDrawPosition(Position(205, 0));
+
+		for (const Mineral *m : m_base->Minerals()) {
+			m_minerals.push_back( AMineralPatch(m->Unit(), m_resourceDepot->getDistance(m->Unit())) );
+		}
+		sort(m_minerals.begin(), m_minerals.end(), &AMineralPatchCmp);
 	}
 
 
 	void AMiningBase::draw() const
 	{
 		Broodwar->drawBoxMap(Position(m_resourceDepot->getTilePosition()), Position(m_resourceDepot->getTilePosition() + m_resourceDepot->getType().tileSize()), Color(200, 200, 200));
-		for (const Mineral *m : m_base->Minerals()) {
-			Broodwar->drawLineMap(m_base->Center(), m->Pos(), Color(50, 255, 50));
-		}
-		for (const Geyser *g : m_base->Geysers()) {
-			Broodwar->drawLineMap(m_base->Center(), g->Pos(), Color(50, 255, 50));
+		for (const AMineralPatch &m : m_minerals) {
+			m.draw();
 		}
 		m_workers->draw();
 	}
 
 
+	BWAPI::Unit AMiningBase::getNextMineralPatch()
+	{
+		vector<int> desiredWorkersOnPatches(m_minerals.size());
+		vector< vector<AUnit*> > unitsOnPatches(m_minerals.size());
+		for (AMineralPatch &m : m_minerals) {
+			m.resetNumWorkers();
+		}
+		for (AUnit* a : m_workers->units()) {
+			const BWAPI::Unit t = a->targetUnit();
+			for (int mIdx = 0; mIdx < (int)m_minerals.size(); mIdx++) {
+				AMineralPatch &m = m_minerals[mIdx];
+				if (t != NULL && t->getID() == m.unit()->getID()) {
+					m.addWorker();
+					unitsOnPatches[mIdx].push_back(a);
+				}
+			}
+		}
+		for (int i = 0; i < (int)unitsOnPatches.size(); i++) {
+			if (unitsOnPatches[i].size() > 3) {
+				for (int j = 3; j < (int)unitsOnPatches[i].size(); j++) {
+					unitsOnPatches[i][j]->stop();
+				}
+			}
+		}
+		for (int maxNumWorkers = 0; maxNumWorkers < 3; maxNumWorkers++) {
+			for (const AMineralPatch &m : m_minerals) {
+				if (m.numWorkers() <= maxNumWorkers) {
+					return m.unit();
+				}
+			}
+		}
+		return m_minerals[0].unit();
+	}
+
 	void AMiningBase::onFrame()
 	{
+		if (Broodwar->getFrameCount()%20 == 0)
+		{
+			// in order to update statistics
+			getNextMineralPatch();
+		}
 		m_workers->onFrame();
 	}
 

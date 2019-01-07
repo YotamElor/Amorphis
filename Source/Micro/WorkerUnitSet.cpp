@@ -20,9 +20,10 @@ namespace Amorphis {
 			else if (m_miningBase->base() == NULL) {
 				AERR("m_miningBase->base() == NULL");
 			}
+
 			for (AUnit *unit : m_units) {
 				if (unit->state() != AUnit::GatherGas && unit->state() != AUnit::GatherMinerals) {
-					unit->gather(m_miningBase->base()->Minerals()[0]);
+					unit->gather(m_miningBase->getNextMineralPatch());
 				}
 			}
 		}
@@ -41,7 +42,7 @@ namespace Amorphis {
 	}
 
 
-	void WorkerUnitSet::gather(AMiningBase const* miningBase, const int numGasWorkers)
+	void WorkerUnitSet::gather(AMiningBase* miningBase, const int numGasWorkers)
 	{
 		m_miningBase = miningBase;
 		m_numGasWorkers = numGasWorkers;

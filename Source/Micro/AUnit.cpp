@@ -48,9 +48,19 @@ namespace Amorphis {
 		m_unit->move(m_targetPosition);
 	}
 
-	void AUnit::gather(BWEM::Ressource const* resource)
+
+	void AUnit::gather(BWAPI::Unit unit)
 	{
+		AERR("AUnit::gather should not be called");
 	}
+
+
+	void AUnit::stop()
+	{
+		m_unit->stop();
+		m_state = Idle;
+	}
+
 
 	const char * AUnit::toString(State state) const
 	{

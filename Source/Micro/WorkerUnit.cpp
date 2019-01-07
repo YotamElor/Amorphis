@@ -11,23 +11,17 @@ namespace Amorphis {
 	}
 
 
-	void WorkerUnit::gather(BWEM::Ressource const * resource)
+	void WorkerUnit::gather(BWAPI::Unit unit)
 	{
-		m_targetUnit = resource->Unit();
-		if (resource->IsMineral()) {
-			m_state = GatherMinerals;
-		} else if (resource->IsGeyser()) {
-			m_state = GatherGas;
-		} else {
-			AERR("resource problem");
-		}
+		m_targetUnit = unit;
+		m_state = GatherMinerals;
 	}
 
 
 	void WorkerUnit::onFrame_()
 	{
 		if (m_state == GatherMinerals) {
-			if (m_unit->isIdle()) {
+			if (!m_unit->isGatheringMinerals() || (m_unit->getOrderTarget()!=NULL && m_unit->getOrderTarget()->getType()== UnitTypes::Enum::Resource_Mineral_Field && m_unit->getOrderTarget() != m_targetUnit)) {
 				m_unit->gather(m_targetUnit);
 			}
 		}

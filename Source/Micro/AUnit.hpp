@@ -40,12 +40,14 @@ namespace Amorphis {
 
 		virtual void draw() const;
 		State state() const { return m_state; }
-		AUnitSet const* unitSet() const { return m_unitSet;  }
+		AUnitSet const* unitSet() const { return m_unitSet; }
+		const BWAPI::Unit targetUnit() const { return m_targetUnit; }
 		void setUnitSet(AUnitSet const* unitSet) { m_unitSet = unitSet;  }
 
 		virtual void attack(BWAPI::Unit unit);
 		virtual void move(BWAPI::Position position);
-		virtual void gather(BWEM::Ressource const* resource);
+		virtual void gather(BWAPI::Unit unit);
+		virtual void stop();
 	};
 
 

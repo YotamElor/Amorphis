@@ -11,7 +11,7 @@ namespace Amorphis {
 
 	class WorkerUnitSet : public AUnitSet {
 	protected:
-		AMiningBase const* m_miningBase = NULL;
+		AMiningBase* m_miningBase = NULL;
 		virtual void onFrame_();
 		int m_numGasWorkers;
 
@@ -19,7 +19,7 @@ namespace Amorphis {
 		WorkerUnitSet() {}
 		WorkerUnitSet(std::string name, BWAPI::UnitType type) : AUnitSet(name, type) {}
 		virtual void draw() const;
-		void gather(AMiningBase const* miningBase, const int numGasWorkers);
+		void gather(AMiningBase* miningBase, const int numGasWorkers);
 	};
 
 

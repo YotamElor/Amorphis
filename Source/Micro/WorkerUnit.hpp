@@ -11,7 +11,7 @@ namespace Amorphis {
 		virtual void onFrame_();
 	public:
 		WorkerUnit(BWAPI::Unit unit);
-		void gather(BWEM::Ressource const* resource);
+		void gather(BWAPI::Unit unit);
 	};
 
 

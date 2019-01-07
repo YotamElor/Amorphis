@@ -44,6 +44,7 @@ namespace Amorphis {
 		virtual void onFrame();
 		virtual void moveFormation(const Formation &f);
 		const std::string& name() const { return m_name; }
+		const std::vector<AUnit*>& units() const { return m_units; }
 	};
 
 
