@@ -1,13 +1,13 @@
 #pragma once
 #include <BWAPI.h>
-#include "UnitsManager.hpp"
+#include "AmorphisMain.hpp"
 
 // Remember not to use "Broodwar" in any global class constructor!
 
 
 class AmorphisAIModule : public BWAPI::AIModule
 {
-	Amorphis::UnitsManager m_unitsManager;
+	Amorphis::AmorphisMain amorphisMain;
 
 
 public:

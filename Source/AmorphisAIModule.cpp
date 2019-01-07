@@ -1,4 +1,4 @@
-#include "Amorphis.h"
+#include "AmorphisAIModule.h"
 #include <iostream>
 #include "Utils/Logger.hpp"
 #include "bwem/bwem.h"
@@ -7,6 +7,7 @@
 using namespace BWAPI;
 using namespace Filter;
 using namespace Amorphis;
+using namespace std;
 namespace { auto & theMap = BWEM::Map::Instance(); }
 
 
@@ -14,6 +15,13 @@ void AmorphisAIModule::onStart()
 {
 	Logger::getInstance()->init();
 	ALOG("The map is " + Broodwar->mapName());
+
+	Broodwar << "Map initialization..." << std::endl;
+
+//	theMap.Initialize();
+//	theMap.EnableAutomaticPathAnalysis();
+//	bool startingLocationsOK = theMap.FindBasesForStartingLocations();
+//	assert(startingLocationsOK);
 
 	// Enable the UserInput flag, which allows us to control the bot and type messages.
 	Broodwar->enableFlag(Flag::UserInput);
@@ -24,6 +32,7 @@ void AmorphisAIModule::onStart()
 	// Set the command optimization level so that common commands can be grouped
 	// and reduce the bot's APM (Actions Per Minute).
 	Broodwar->setCommandOptimizationLevel(2);
+	amorphisMain.init();
 
 //	if (Broodwar->enemy()) {
 //		ALOG("The matchup is " + Broodwar->self()->getRace().c_str() + " vs " + Broodwar->enemy()->getRace().c_str());
@@ -44,19 +53,28 @@ void AmorphisAIModule::onFrame()
 	// Called once every game frame
 
 	// Display the game frame rate as text in the upper left area of the screen
-	Broodwar->drawTextScreen(0, 0, "FPS: %d (%.1f)", Broodwar->getFPS(), Broodwar->getAverageFPS());
-	m_unitsManager.draw();
+	try
+	{
+		Broodwar->drawTextScreen(0, 0, "FPS: %d (%.1f)", Broodwar->getFPS(), Broodwar->getAverageFPS());
+		//amorphisMain.draw();
+	}
+	catch (const std::exception & e)
+	{
+		AERR(string("EXCEPTION: ") + string(e.what()));
+	}
 
 	// Return if the game is a replay or is paused
 	if (Broodwar->isReplay() || Broodwar->isPaused() || !Broodwar->self())
 		return;
 
-	// Prevent spamming by only running our onFrame once every number of latency frames.
-	// Latency frames are the number of frames before commands are processed.
-	if (Broodwar->getFrameCount() % Broodwar->getLatencyFrames() != 0)
-		return;
-
-	m_unitsManager.onFrame();
+	try
+	{
+		amorphisMain.onFrame();
+	}
+	catch (const std::exception & e)
+	{
+		AERR(string("EXCEPTION: ") + string(e.what()));
+	}
 }
 
 void AmorphisAIModule::onSendText(std::string text)
@@ -104,8 +122,7 @@ void AmorphisAIModule::onNukeDetect(BWAPI::Position target)
 
 void AmorphisAIModule::onUnitDiscover(BWAPI::Unit unit)
 {
-	m_unitsManager.onUnitDiscover(unit);
-	ALOG(unit->getType().toString());
+	amorphisMain.onUnitDiscover(unit);
 }
 
 void AmorphisAIModule::onUnitEvade(BWAPI::Unit unit)

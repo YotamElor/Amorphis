@@ -2,7 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Source\Dll.cpp" />
-    <ClCompile Include="Source\Amorphis.cpp" />
     <ClCompile Include="Source\UnitsManager.cpp" />
     <ClCompile Include="Source\bwem\area.cpp">
       <Filter>bwem</Filter>
@@ -79,10 +78,16 @@
     <ClCompile Include="Source\Utils\Logger.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Macro\ABase.cpp">
+      <Filter>Macro</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Macro\AMiningBase.cpp">
+      <Filter>Macro</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AmorphisAIModule.cpp" />
+    <ClCompile Include="Source\AmorphisMain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Amorphis.h" />
-    <ClInclude Include="Source\DisplaySettings.hpp" />
     <ClInclude Include="Source\UnitsManager.hpp" />
     <ClInclude Include="Source\bwem\area.h">
       <Filter>bwem</Filter>
@@ -162,6 +167,17 @@
     <ClInclude Include="Source\Utils\Logger.hpp">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Utils\DisplaySettings.hpp">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Macro\ABase.hpp">
+      <Filter>Macro</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Macro\AMiningBase.hpp">
+      <Filter>Macro</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AmorphisAIModule.h" />
+    <ClInclude Include="Source\AmorphisMain.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="bwem">
@@ -172,6 +188,9 @@
     </Filter>
     <Filter Include="Utils">
       <UniqueIdentifier>{9b028b2c-653a-4428-9fab-f920abb48fa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Macro">
+      <UniqueIdentifier>{4d6674d9-16b4-4b2b-82c5-401f9238a4ff}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

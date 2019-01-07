@@ -1,6 +1,6 @@
 #pragma once
 #include <BWAPI.h>
-#include "DisplaySettings.hpp"
+#include "Utils/DisplaySettings.hpp"
 #include "Utils/Logger.hpp"
 
 
