@@ -17,9 +17,6 @@ namespace Amorphis {
 			if (m_miningBase == NULL) {
 				AERR("m_miningBase == NULL");
 			}
-			else if (m_miningBase->base() == NULL) {
-				AERR("m_miningBase->base() == NULL");
-			}
 
 			for (AUnit *unit : m_units) {
 				if (unit->state() != AUnit::GatherGas && unit->state() != AUnit::GatherMinerals) {

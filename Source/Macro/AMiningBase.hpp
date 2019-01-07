@@ -10,7 +10,6 @@ namespace Amorphis {
 
 	class AMiningBase {
 		BWAPI::Unit m_resourceDepot;
-		BWEM::Base const* m_base = NULL;
 		WorkerUnitSet *m_workers;
 		std::string m_name;
 		std::vector<AMineralPatch> m_minerals;
@@ -19,7 +18,6 @@ namespace Amorphis {
 		void draw() const;
 		void onFrame();
 		void addWorker(BWAPI::Unit unit);
-		BWEM::Base const* base() const { return m_base;  }
 		void gather(int numGasWorkers);
 		const std::vector<AMineralPatch>& minerals() const { return m_minerals; }
 		BWAPI::Unit getNextMineralPatch();

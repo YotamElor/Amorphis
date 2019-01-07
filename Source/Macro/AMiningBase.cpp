@@ -20,14 +20,16 @@ namespace Amorphis {
 	AMiningBase::AMiningBase(const std::string &name, BWAPI::Unit resourceDepot) : m_name(name)
 	{
 		m_resourceDepot = resourceDepot;
+
+		BWEM::Base const* baseBwem = NULL;
 		for (const Area & area : theMap.Areas()) {
 			for (const Base & base : area.Bases()) {
 				if (m_resourceDepot->getTilePosition() ==  base.Location()) {
-					m_base = &base;
+					baseBwem = &base;
 				}
 			}
 		}
-		if (m_base == NULL) {
+		if (baseBwem == NULL) {
 			AERR(string("m_base == NULL : ") + m_name);
 		}
 
@@ -42,7 +44,7 @@ namespace Amorphis {
 		m_workers = new WorkerUnitSet(m_name, type);
 		m_workers->setDrawPosition(Position(205, 0));
 
-		for (const Mineral *m : m_base->Minerals()) {
+		for (const Mineral *m : baseBwem->Minerals()) {
 			m_minerals.push_back( AMineralPatch(m->Unit(), m_resourceDepot->getDistance(m->Unit())) );
 		}
 		sort(m_minerals.begin(), m_minerals.end(), &AMineralPatchCmp);
