@@ -78,9 +78,6 @@
     <ClCompile Include="Source\Utils\Logger.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Macro\ABase.cpp">
-      <Filter>Macro</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Macro\AMiningBase.cpp">
       <Filter>Macro</Filter>
     </ClCompile>
@@ -93,6 +90,9 @@
       <Filter>Micro</Filter>
     </ClCompile>
     <ClCompile Include="Source\Macro\AMineralPatch.cpp">
+      <Filter>Macro</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Macro\Strategy.cpp">
       <Filter>Macro</Filter>
     </ClCompile>
   </ItemGroup>
@@ -179,9 +179,6 @@
     <ClInclude Include="Source\Utils\DisplaySettings.hpp">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Macro\ABase.hpp">
-      <Filter>Macro</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Macro\AMiningBase.hpp">
       <Filter>Macro</Filter>
     </ClInclude>
@@ -194,6 +191,9 @@
       <Filter>Micro</Filter>
     </ClInclude>
     <ClInclude Include="Source\Macro\AMineralPatch.hpp">
+      <Filter>Macro</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Macro\Strategy.hpp">
       <Filter>Macro</Filter>
     </ClInclude>
   </ItemGroup>

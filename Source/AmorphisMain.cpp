@@ -14,7 +14,6 @@ namespace Amorphis {
 		for (const BWAPI::Unit &unit : Broodwar->self()->getUnits()) {
 			if (unit->getType().isResourceDepot()) {
 				m_miningBases.push_back(new AMiningBase("MB", unit));
-				m_miningBases.back()->gather(0);
 			}
 		}
 		if (m_miningBases.size() != 1) {
@@ -29,11 +28,13 @@ namespace Amorphis {
 		}
 	}
 
+
 	void AmorphisMain::draw() const
 	{
 		for (auto miningBase : m_miningBases) {
 			miningBase->draw();
 		}
+		m_strategy.draw();
 	}
 
 
@@ -45,6 +46,16 @@ namespace Amorphis {
 
 		for (auto miningBase : m_miningBases) {
 			miningBase->onFrame();
+		}
+
+		m_strategy.onFrame();
+		BWAPI::UnitType nextToBuild = m_strategy.nextToBuild();
+		if (nextToBuild != NULL &&
+			Broodwar->self()->hasUnitTypeRequirement(nextToBuild) &&
+			Broodwar->self()->minerals() >= nextToBuild.mineralPrice() &&
+			Broodwar->self()->gas() >= nextToBuild.gasPrice())
+		{
+			m_miningBases[0]->build(nextToBuild);
 		}
 	}
 

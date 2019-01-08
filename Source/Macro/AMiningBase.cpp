@@ -17,7 +17,7 @@ namespace { auto & theMap = BWEM::Map::Instance(); }
 namespace Amorphis {
 
 
-	AMiningBase::AMiningBase(const std::string &name, BWAPI::Unit resourceDepot) : m_name(name)
+	AMiningBase::AMiningBase(const std::string &name, BWAPI::Unit resourceDepot) : m_name(name), m_numGasWorkers(0)
 	{
 		m_resourceDepot = resourceDepot;
 
@@ -43,6 +43,7 @@ namespace Amorphis {
 		}
 		m_workers = new WorkerUnitSet(m_name, type);
 		m_workers->setDrawPosition(Position(205, 0));
+		m_workers->gather(this, m_numGasWorkers);
 
 		for (const Mineral *m : baseBwem->Minerals()) {
 			m_minerals.push_back( AMineralPatch(m->Unit(), m_resourceDepot->getDistance(m->Unit())) );
@@ -95,6 +96,23 @@ namespace Amorphis {
 		return m_minerals[0].unit();
 	}
 
+	bool AMiningBase::build(BWAPI::UnitType whatToBuild)
+	{
+		if (whatToBuild.isBuilding()) {
+
+		}
+		else {
+			BWAPI::Unitset larva = m_resourceDepot->getLarva();
+			if (larva.size() == 0) {
+				return false;
+			}
+			else {
+				(*larva.begin())->morph(whatToBuild);
+			}
+		}
+		return false;
+	}
+
 	void AMiningBase::onFrame()
 	{
 		if (Broodwar->getFrameCount()%20 == 0)
@@ -120,8 +138,5 @@ namespace Amorphis {
 		m_workers->insert(new WorkerUnit(unit));
 	}
 
-	void AMiningBase::gather(int numGasWorkers) {
-		m_workers->gather(this, numGasWorkers);
-	}
 
 }
