@@ -24,6 +24,9 @@ namespace Amorphis {
 			if (!m_unit->isGatheringMinerals() || (m_unit->getOrderTarget()!=NULL && m_unit->getOrderTarget()->getType()== UnitTypes::Enum::Resource_Mineral_Field && m_unit->getOrderTarget() != m_targetUnit)) {
 				m_unit->gather(m_targetUnit);
 			}
+			else if (m_targetUnit==NULL || !m_targetUnit->exists()){
+				stop();
+			}
 		}
 	}
 

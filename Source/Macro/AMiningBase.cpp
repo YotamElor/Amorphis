@@ -102,6 +102,15 @@ namespace Amorphis {
 			// in order to update statistics
 			getNextMineralPatch();
 		}
+		for (auto it = m_minerals.begin(); it != m_minerals.end(); ) {
+			if (!it->unit()->exists()) {
+				m_minerals.erase(it);
+				getNextMineralPatch();
+			}
+			else {
+				it++;
+			}
+		}
 		m_workers->onFrame();
 	}
 
