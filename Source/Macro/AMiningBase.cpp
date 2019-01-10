@@ -3,6 +3,7 @@
 #include "Utils/Logger.hpp"
 #include "Micro/WorkerUnit.hpp"
 
+
 #include "bwem/map.h"
 #include "bwem/area.h"
 #include "bwem/neutral.h"
@@ -21,15 +22,14 @@ namespace Amorphis {
 	{
 		m_resourceDepot = resourceDepot;
 
-		BWEM::Base const* baseBwem = NULL;
 		for (const Area & area : theMap.Areas()) {
 			for (const Base & base : area.Bases()) {
 				if (m_resourceDepot->getTilePosition() ==  base.Location()) {
-					baseBwem = &base;
+					m_baseBwem = &base;
 				}
 			}
 		}
-		if (baseBwem == NULL) {
+		if (m_baseBwem == NULL) {
 			AERR(string("m_base == NULL : ") + m_name);
 		}
 
@@ -45,7 +45,7 @@ namespace Amorphis {
 		m_workers->setDrawPosition(Position(205, 0));
 		m_workers->gather(this, m_numGasWorkers);
 
-		for (const Mineral *m : baseBwem->Minerals()) {
+		for (const Mineral *m : m_baseBwem->Minerals()) {
 			m_minerals.push_back( AMineralPatch(m->Unit(), m_resourceDepot->getDistance(m->Unit())) );
 		}
 		sort(m_minerals.begin(), m_minerals.end(), &AMineralPatchCmp);
@@ -96,21 +96,29 @@ namespace Amorphis {
 		return m_minerals[0].unit();
 	}
 
+
 	bool AMiningBase::build(BWAPI::UnitType whatToBuild)
 	{
-		if (whatToBuild.isBuilding()) {
+		const TilePosition buildTile = Broodwar->getBuildLocation(whatToBuild, m_resourceDepot->getTilePosition());
+		m_workers->build(whatToBuild, buildTile);
+		return false;
+	}
 
+
+	bool AMiningBase::morphLarva(BWAPI::UnitType whatToBuild)
+	{
+		if (whatToBuild.isBuilding()) {
+			AERR("morphLarva: whatToBuild.isBuilding()");
+		}
+		BWAPI::Unitset larva = m_resourceDepot->getLarva();
+		if (larva.size() == 0) {
+			AWARN("morphLarva: larva.size() == 0");
+			return false;
 		}
 		else {
-			BWAPI::Unitset larva = m_resourceDepot->getLarva();
-			if (larva.size() == 0) {
-				return false;
-			}
-			else {
-				(*larva.begin())->morph(whatToBuild);
-			}
+			(*larva.begin())->morph(whatToBuild);
 		}
-		return false;
+		return true;
 	}
 
 	void AMiningBase::onFrame()

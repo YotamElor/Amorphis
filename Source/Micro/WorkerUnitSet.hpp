@@ -20,6 +20,7 @@ namespace Amorphis {
 		WorkerUnitSet(std::string name, BWAPI::UnitType type) : AUnitSet(name, type) {}
 		virtual void draw() const;
 		void gather(AMiningBase* miningBase, const int numGasWorkers);
+		void build(BWAPI::UnitType unitType, BWAPI::TilePosition tilePosition);
 	};
 
 

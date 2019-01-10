@@ -30,4 +30,12 @@ namespace Amorphis {
 		}
 	}
 
+
+	void WorkerUnit::build(BWAPI::UnitType unitType, BWAPI::TilePosition tilePosition)
+	{
+		m_unit->build(unitType, tilePosition);
+		m_state = Build;
+	}
+
+
 }

@@ -18,7 +18,6 @@ namespace Amorphis {
 		BWAPI::Position m_targetPosition;
 		AUnitSet const* m_unitSet = NULL;
 
-		AUnit(BWAPI::Unit unit) : m_unit(unit) {}
 		virtual void displayUnitName() const;
 		virtual void displayTarget() const;
 
@@ -31,23 +30,27 @@ namespace Amorphis {
 			Move,
 			GatherMinerals,
 			GatherGas,
+			Build,
 		} m_state = Idle;
 		const char* toString(State state) const;
 
+		AUnit(BWAPI::Unit unit) : m_unit(unit) {}
 		const BWAPI::Unit unit() const { return m_unit; }
 		bool isAlive() const { return m_unit->exists(); }
 		void onFrame() { if (isAlive()) onFrame_(); }
 
-		virtual void draw() const;
 		State state() const { return m_state; }
 		AUnitSet const* unitSet() const { return m_unitSet; }
 		const BWAPI::Unit targetUnit() const { return m_targetUnit; }
 		void setUnitSet(AUnitSet const* unitSet) { m_unitSet = unitSet;  }
 
+		virtual void draw() const;
+		virtual BWAPI::UnitType getType() const { return m_unit->getType(); }
 		virtual void attack(BWAPI::Unit unit);
 		virtual void move(BWAPI::Position position);
 		virtual void gather(BWAPI::Unit unit);
 		virtual void stop();
+		virtual void build(BWAPI::UnitType unitType, BWAPI::TilePosition tilePosition);
 	};
 
 

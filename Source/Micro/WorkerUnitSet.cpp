@@ -19,7 +19,7 @@ namespace Amorphis {
 			}
 
 			for (AUnit *unit : m_units) {
-				if (unit->state() != AUnit::GatherGas && unit->state() != AUnit::GatherMinerals) {
+				if (unit->state() == AUnit::Idle) {
 					unit->gather(m_miningBase->getNextMineralPatch());
 				}
 			}
@@ -45,5 +45,12 @@ namespace Amorphis {
 		m_numGasWorkers = numGasWorkers;
 		m_state = Gather;
 	}
+
+
+	void WorkerUnitSet::build(BWAPI::UnitType unitType, BWAPI::TilePosition tilePosition)
+	{
+		m_units[0]->build(unitType, tilePosition);
+	}
+
 
 }

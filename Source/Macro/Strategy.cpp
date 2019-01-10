@@ -16,7 +16,7 @@ namespace Amorphis {
 		m_unitsCounter.clear();
 		for (const Unit &u : Broodwar->self()->getUnits()) {
 			UnitType unitType = u->getType();
-			if (u->getType() == UnitTypes::Zerg_Egg) {
+			if (u->isMorphing() == UnitTypes::Zerg_Egg || u->getLastCommand().type == UnitCommandTypes::Morph) {
 				unitType = u->getLastCommand().getUnitType();
 			}
 			if (m_unitsCounter.find(unitType) == m_unitsCounter.end()) {
@@ -24,9 +24,19 @@ namespace Amorphis {
 			}
 			m_unitsCounter[unitType]++;
 		}
-		if (m_unitsCounter[UnitTypes::Zerg_Drone] == 8 && m_unitsCounter[UnitTypes::Zerg_Overlord] == 1) {
-			m_nextToBuild = UnitTypes::Zerg_Overlord;
+		m_nextToBuild = UnitTypes::Zerg_Spawning_Pool;
+		return;
+		if (m_unitsCounter[UnitTypes::Zerg_Drone] > 8) {
+			if (m_unitsCounter.count(UnitTypes::Zerg_Spawning_Pool) == 0) {
+				m_nextToBuild = UnitTypes::Zerg_Spawning_Pool;
+			}
+			else {
+				m_nextToBuild = UnitTypes::Zerg_Zergling;
+			}
 		}
+		else if (m_unitsCounter[UnitTypes::Zerg_Drone] == 8 && m_unitsCounter[UnitTypes::Zerg_Overlord] == 1) {
+			m_nextToBuild = UnitTypes::Zerg_Overlord;
+		} 
 		else {
 			m_nextToBuild = UnitTypes::Zerg_Drone;
 		}

@@ -1,5 +1,6 @@
 #include "AmorphisMain.hpp"
 #include "Utils/Logger.hpp"
+#include "UnitsManager.hpp"
 
 
 using namespace std;
@@ -10,6 +11,7 @@ namespace Amorphis {
 
 	void AmorphisMain::init()
 	{
+		return;
 		// find initial ResourceDepot
 		for (const BWAPI::Unit &unit : Broodwar->self()->getUnits()) {
 			if (unit->getType().isResourceDepot()) {
@@ -31,6 +33,8 @@ namespace Amorphis {
 
 	void AmorphisMain::draw() const
 	{
+		UM->draw();
+		return;
 		for (auto miningBase : m_miningBases) {
 			miningBase->draw();
 		}
@@ -44,32 +48,36 @@ namespace Amorphis {
 			init();
 		}
 
+		UM->onFrame();
+		return;
+
 		for (auto miningBase : m_miningBases) {
 			miningBase->onFrame();
 		}
 
 		m_strategy.onFrame();
-		BWAPI::UnitType nextToBuild = m_strategy.nextToBuild();
+		UnitType nextToBuild = m_strategy.nextToBuild();
 		if (nextToBuild != NULL &&
-			Broodwar->self()->hasUnitTypeRequirement(nextToBuild) &&
 			Broodwar->self()->minerals() >= nextToBuild.mineralPrice() &&
 			Broodwar->self()->gas() >= nextToBuild.gasPrice())
 		{
-			m_miningBases[0]->build(nextToBuild);
+			if (nextToBuild.isBuilding()) {
+				m_miningBases[0]->build(nextToBuild);
+			}
+			else {
+				m_miningBases[0]->morphLarva(nextToBuild);
+			}
 		}
 	}
 
 
 	void AmorphisMain::onUnitDiscover(BWAPI::Unit unit)
 	{
-		if (Broodwar->getFrameCount() == 0) {
-			// dont call discover on first frame
-			return;
-		}
 		if (unit->getPlayer()->getID() == Broodwar->self()->getID()) {
-			if (unit->getType().isWorker()) {
-				m_miningBases[0]->addWorker(unit);
-			}
+//			if (unit->getType().isWorker()) {
+//				m_miningBases[0]->addWorker(unit);
+//			}
+			UM->addUnit(unit);
 		}
 		else if (unit->getPlayer()->getID() == Broodwar->enemy()->getID())
 		{

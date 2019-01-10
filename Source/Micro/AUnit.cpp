@@ -55,6 +55,12 @@ namespace Amorphis {
 	}
 
 
+	void AUnit::build(BWAPI::UnitType unitType, BWAPI::TilePosition tilePosition)
+	{
+		AERR("AUnit::build should not be called");
+	}
+
+
 	void AUnit::stop()
 	{
 		m_unit->stop();
@@ -71,6 +77,7 @@ namespace Amorphis {
 		case Move: return "(M)"; break;
 		case GatherMinerals: return "(GM)"; break;
 		case GatherGas: return "(GG)"; break;
+		case Build: return "(B)"; break;
 		}
 		return "Error convert state to string";
 	}

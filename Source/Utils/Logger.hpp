@@ -14,12 +14,14 @@ namespace Amorphis {
 		static Logger* getInstance();
 		void init();
 		void log(const std::string &s);
+		void warn(const std::string &s);
 		void err(const std::string &s);
 		~Logger();
 	};
 
 
 #define ALOG(X) Logger::getInstance()->log(X)
+#define AWARN(X) Logger::getInstance()->warn(X)
 #define AERR(X) Logger::getInstance()->err(X)
 
 

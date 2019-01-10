@@ -9,6 +9,7 @@ namespace Amorphis {
 
 
 	class AMiningBase {
+		BWEM::Base const* m_baseBwem = NULL;
 		BWAPI::Unit m_resourceDepot;
 		WorkerUnitSet *m_workers;
 		std::string m_name;
@@ -21,6 +22,7 @@ namespace Amorphis {
 		void addWorker(BWAPI::Unit unit);
 		const std::vector<AMineralPatch>& minerals() const { return m_minerals; }
 		BWAPI::Unit getNextMineralPatch();
+		bool morphLarva(BWAPI::UnitType whatToBuild);
 		bool build(BWAPI::UnitType whatToBuild);
 	};
 

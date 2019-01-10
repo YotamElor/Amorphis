@@ -33,8 +33,13 @@ namespace Amorphis {
 
 	void Logger::err(const std::string &s)
 	{
-		log(s);
+		log(string("ERROR:") + s);
 		throw(0);
+	}
+
+	void Logger::warn(const std::string &s)
+	{
+		log(string("WARNING:") + s);
 	}
 
 	Logger::~Logger()
