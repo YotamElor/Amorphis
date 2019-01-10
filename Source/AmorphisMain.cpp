@@ -48,8 +48,8 @@ namespace Amorphis {
 		m_strategy.onFrame();
 		UnitType nextToBuild = m_strategy.nextToBuild();
 		if (nextToBuild != NULL &&
-			Broodwar->self()->minerals() >= nextToBuild.mineralPrice() &&
-			Broodwar->self()->gas() >= nextToBuild.gasPrice())
+			Broodwar->self()->minerals() >= nextToBuild.mineralPrice() - UM->mineralDebt() &&
+			Broodwar->self()->gas() >= nextToBuild.gasPrice() - UM->gasDebt())
 		{
 			if (nextToBuild.isBuilding()) {
 				m_miningBases[0]->build(nextToBuild);

@@ -28,13 +28,19 @@ namespace Amorphis {
 				stop();
 			}
 		}
+		else if (m_state == Build) {
+			m_unit->build(m_targetUnitType, m_targetTilePosition);
+		}
 	}
 
 
 	void WorkerUnit::build(BWAPI::UnitType unitType, BWAPI::TilePosition tilePosition)
 	{
-		m_unit->build(unitType, tilePosition);
+		m_targetUnitType = unitType;
+		m_targetTilePosition = tilePosition;
 		m_state = Build;
+		m_mineralDebt = unitType.mineralPrice();
+		m_gasDebt = unitType.gasPrice();
 	}
 
 

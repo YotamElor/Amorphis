@@ -16,7 +16,11 @@ namespace Amorphis {
 		BWAPI::Unit m_unit = NULL;
 		BWAPI::Unit m_targetUnit = NULL;
 		BWAPI::Position m_targetPosition;
+		BWAPI::UnitType m_targetUnitType;
+		BWAPI::TilePosition m_targetTilePosition;
+
 		AUnitSet const* m_unitSet = NULL;
+		int m_mineralDebt, m_gasDebt;
 
 		virtual void displayUnitName() const;
 		virtual void displayTarget() const;
@@ -34,7 +38,7 @@ namespace Amorphis {
 		} m_state = Idle;
 		const char* toString(State state) const;
 
-		AUnit(BWAPI::Unit unit) : m_unit(unit) {}
+		AUnit(BWAPI::Unit unit) : m_unit(unit), m_mineralDebt(0), m_gasDebt(0) {}
 		const BWAPI::Unit unit() const { return m_unit; }
 		bool isAlive() const { return m_unit->exists(); }
 		void onFrame() { if (isAlive()) onFrame_(); }
@@ -48,6 +52,8 @@ namespace Amorphis {
 		virtual void draw() const;
 		virtual BWAPI::UnitType getType() const { return m_unit->getType(); }
 		virtual BWAPI::UnitType getFinalType() const { return (m_unit->getType() == BWAPI::UnitTypes::Zerg_Egg) ? m_unit->getLastCommand().getUnitType() : getType(); }
+		int mineralDebt() const { return m_mineralDebt; }
+		int gasDebt() const { return m_gasDebt; }
 
 		virtual void attack(BWAPI::Unit unit);
 		virtual void move(BWAPI::Position position);

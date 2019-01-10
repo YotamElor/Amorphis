@@ -112,7 +112,7 @@ namespace Amorphis {
 		}
 		BWAPI::Unitset larva = m_resourceDepot->getLarva();
 		if (larva.size() == 0) {
-			AWARN("morphLarva: larva.size() == 0");
+			//AWARN("morphLarva: larva.size() == 0");
 			return false;
 		}
 		else {
