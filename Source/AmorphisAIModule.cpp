@@ -148,7 +148,7 @@ void AmorphisAIModule::onUnitDestroy(BWAPI::Unit unit)
 
 void AmorphisAIModule::onUnitMorph(BWAPI::Unit unit)
 {
-	amorphisMain->onUnitDiscover(unit);
+	amorphisMain->onUnitMorph(unit);
 }
 
 void AmorphisAIModule::onUnitRenegade(BWAPI::Unit unit)

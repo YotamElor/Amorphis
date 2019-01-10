@@ -43,9 +43,12 @@ namespace Amorphis {
 		AUnitSet const* unitSet() const { return m_unitSet; }
 		const BWAPI::Unit targetUnit() const { return m_targetUnit; }
 		void setUnitSet(AUnitSet const* unitSet) { m_unitSet = unitSet;  }
+		void setUnitSetNULL() { m_unitSet = NULL;  }
 
 		virtual void draw() const;
 		virtual BWAPI::UnitType getType() const { return m_unit->getType(); }
+		virtual BWAPI::UnitType getFinalType() const { return (m_unit->getType() == BWAPI::UnitTypes::Zerg_Egg) ? m_unit->getLastCommand().getUnitType() : getType(); }
+
 		virtual void attack(BWAPI::Unit unit);
 		virtual void move(BWAPI::Position position);
 		virtual void gather(BWAPI::Unit unit);

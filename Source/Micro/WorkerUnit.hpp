@@ -13,6 +13,7 @@ namespace Amorphis {
 		WorkerUnit(BWAPI::Unit unit);
 		void gather(BWAPI::Unit unit);
 		void build(BWAPI::UnitType unitType, BWAPI::TilePosition tilePosition);
+		BWAPI::UnitType getFinalType() const;
 	};
 
 

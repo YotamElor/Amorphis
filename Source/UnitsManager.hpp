@@ -2,6 +2,7 @@
 #include <BWAPI.h>
 #include <set>
 #include "Micro/AUnit.hpp"
+#include "Micro/AUnitSet.hpp"
 
 
 using namespace BWAPI;
@@ -38,24 +39,31 @@ namespace Amorphis {
 					s += it->first.toString() + std::string(" (") + std::to_string(it->second) + std::string(")\n");
 				}
 			}
-			Broodwar->drawTextScreen(Position(0, 20), s.c_str());
+			Broodwar->drawTextScreen(Position(0, 40), s.c_str());
 		}
 	};
 
 
 	class UnitsManager{
 	private:
+		bool m_initialized = false;
 		static UnitsManager* m_instance;
 		std::set<AUnit*> m_allUnits;
+		std::map<BWAPI::UnitType, std::set<AUnitSet*>> m_unitSets;
 		UnitsCounter m_unitsCounter;
 		std::map<int, int> m_knownUnitIDs;
+		void setUnitSetsDrawPosition();
 	public:
 		UnitsManager() {}
 		static UnitsManager* UnitsManager::getInstance();
 		void init();
 		void addUnit(BWAPI::Unit unit);
+		void removeUnit(BWAPI::Unit unit);
+		void addUnitSet(AUnitSet* unitSet);
 		void onFrame();
+		void moveUnit(AUnitSet * s, AUnitSet * d, AUnit * u) const;
 		void draw();
+		const UnitsCounter& unitsCounter() const { return m_unitsCounter; }
 	};
 
 

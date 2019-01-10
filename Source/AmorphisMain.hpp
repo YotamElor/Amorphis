@@ -18,6 +18,7 @@ namespace Amorphis {
 		void onFrame();
 		void draw() const;
 		void onUnitDiscover(BWAPI::Unit unit);
+		void onUnitMorph(BWAPI::Unit unit);
 	};
 
 

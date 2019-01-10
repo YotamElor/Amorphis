@@ -2,6 +2,7 @@
 #include "Utils/DisplaySettings.hpp"
 #include "Utils/Logger.hpp"
 #include "Micro/WorkerUnit.hpp"
+#include "UnitsManager.hpp"
 
 
 #include "bwem/map.h"
@@ -42,8 +43,8 @@ namespace Amorphis {
 			type = UnitTypes::Enum::Zerg_Drone;
 		}
 		m_workers = new WorkerUnitSet(m_name, type);
-		m_workers->setDrawPosition(Position(205, 0));
 		m_workers->gather(this, m_numGasWorkers);
+		UM->addUnitSet(m_workers);
 
 		for (const Mineral *m : m_baseBwem->Minerals()) {
 			m_minerals.push_back( AMineralPatch(m->Unit(), m_resourceDepot->getDistance(m->Unit())) );
@@ -58,7 +59,6 @@ namespace Amorphis {
 		for (const AMineralPatch &m : m_minerals) {
 			m.draw();
 		}
-		m_workers->draw();
 	}
 
 
@@ -137,13 +137,6 @@ namespace Amorphis {
 				it++;
 			}
 		}
-		m_workers->onFrame();
-	}
-
-
-	void AMiningBase::addWorker(BWAPI::Unit unit)
-	{
-		m_workers->insert(new WorkerUnit(unit));
 	}
 
 

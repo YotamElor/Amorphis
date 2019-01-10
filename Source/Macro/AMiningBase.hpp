@@ -19,7 +19,6 @@ namespace Amorphis {
 		AMiningBase(const std::string &name, BWAPI::Unit resourceDepot);
 		void draw() const;
 		void onFrame();
-		void addWorker(BWAPI::Unit unit);
 		const std::vector<AMineralPatch>& minerals() const { return m_minerals; }
 		BWAPI::Unit getNextMineralPatch();
 		bool morphLarva(BWAPI::UnitType whatToBuild);

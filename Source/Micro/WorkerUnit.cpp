@@ -38,4 +38,7 @@ namespace Amorphis {
 	}
 
 
+	BWAPI::UnitType WorkerUnit::getFinalType() const {
+		return (m_state==Build) ? m_unit->getLastCommand().getUnitType() : getType();
+	}
 }

@@ -11,8 +11,7 @@ namespace Amorphis {
 
 	void AmorphisMain::init()
 	{
-		return;
-		// find initial ResourceDepot
+		UM->init();
 		for (const BWAPI::Unit &unit : Broodwar->self()->getUnits()) {
 			if (unit->getType().isResourceDepot()) {
 				m_miningBases.push_back(new AMiningBase("MB", unit));
@@ -21,20 +20,12 @@ namespace Amorphis {
 		if (m_miningBases.size() != 1) {
 			AERR("m_miningBases.size() != 1");
 		}
-
-		// assign all workers to the initial ResourceDepot
-		for (const BWAPI::Unit &unit : Broodwar->self()->getUnits()) {
-			if (unit->getType().isWorker()) {
-				m_miningBases[0]->addWorker(unit);
-			}
-		}
 	}
 
 
 	void AmorphisMain::draw() const
 	{
 		UM->draw();
-		return;
 		for (auto miningBase : m_miningBases) {
 			miningBase->draw();
 		}
@@ -49,7 +40,6 @@ namespace Amorphis {
 		}
 
 		UM->onFrame();
-		return;
 
 		for (auto miningBase : m_miningBases) {
 			miningBase->onFrame();
@@ -74,13 +64,19 @@ namespace Amorphis {
 	void AmorphisMain::onUnitDiscover(BWAPI::Unit unit)
 	{
 		if (unit->getPlayer()->getID() == Broodwar->self()->getID()) {
-//			if (unit->getType().isWorker()) {
-//				m_miningBases[0]->addWorker(unit);
-//			}
 			UM->addUnit(unit);
 		}
 		else if (unit->getPlayer()->getID() == Broodwar->enemy()->getID())
 		{
+		}
+	}
+
+
+	void AmorphisMain::onUnitMorph(BWAPI::Unit unit)
+	{
+		if (unit->getPlayer()->getID() == Broodwar->self()->getID()) {
+			UM->removeUnit(unit);
+			UM->addUnit(unit);
 		}
 	}
 

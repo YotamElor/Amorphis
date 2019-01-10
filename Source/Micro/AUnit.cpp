@@ -14,7 +14,8 @@ namespace Amorphis {
 		if (DisplaySettings::UnitName) {
 			const Position p = m_unit->getPosition();
 			const string name = (m_unitSet == NULL) ? "NULL" : m_unitSet->name();
-			Broodwar->drawTextMap(p, "%s:%s\n%s", name.c_str(), toString(m_state), m_unit->getLastCommand().getType().toString().c_str());
+			Broodwar->drawTextMap(p, "%s:%s", name.c_str(), toString(m_state));
+			//Broodwar->drawTextMap(p, "%s:%s\n%s", name.c_str(), toString(m_state), m_unit->getLastCommand().getType().toString().c_str());
 		}
 	}
 

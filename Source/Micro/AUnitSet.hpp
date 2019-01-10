@@ -15,7 +15,7 @@ namespace Amorphis {
 		std::string m_name;
 		Formation m_targetFormation;
 
-		virtual void onFrame_() = 0;
+		virtual void onFrame_() {}
 
 	public:
 		static const int boxWidth = 200;
@@ -35,10 +35,13 @@ namespace Amorphis {
 		AUnitSet() {}
 		AUnitSet(std::string name, BWAPI::UnitType type) : m_name(name), m_type(type) {}
 
-		virtual void insert(AUnit *unit);
+		virtual void addUnit(AUnit *unit);
+		virtual void removeUnit(BWAPI::Unit unit);
+		virtual void removeUnit(AUnit *unit);
 		virtual void removeDead();
 		virtual void setDrawPosition(BWAPI::Position p);
 		virtual BWAPI::Position center() const;
+		BWAPI::UnitType type() const { return m_type;  }
 
 		virtual void draw() const;
 		virtual void onFrame();

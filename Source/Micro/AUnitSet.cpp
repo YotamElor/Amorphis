@@ -6,18 +6,42 @@ using namespace std;
 namespace Amorphis {
 
 
-	void AUnitSet::insert(AUnit *unit)
+	void AUnitSet::addUnit(AUnit *unit)
 	{
-		if (unit->unit()->getType() != m_type) {
+		if (m_type != UnitTypes::None && unit->unit()->getType() != m_type) {
 			ALOG(string("unit->unit()->getType() = ") + unit->unit()->getType().c_str());
-			ALOG(string("unit->unit()->getType() = ") + m_type.c_str());
+			ALOG(string("m_type = ") + m_type.c_str());
 			AERR("ERROR:AUnitSet::insert: unit->unit()->getType() != m_type");
 		}
 		if (unit->unitSet() != NULL) {
 			AERR(string("unit->unitSet() = ") + unit->unitSet()->name());
 		}
 		m_units.push_back(unit);
-		m_units.back()->setUnitSet(this);
+		unit->setUnitSet(this);
+	}
+
+
+	void AUnitSet::removeUnit(BWAPI::Unit unit)
+	{
+		for (int i = m_units.size() - 1; i >= 0; i--) {
+			if (m_units[i]->unit() == unit) {
+				removeUnit(m_units[i]);
+				return;
+			}
+		}
+	}
+	
+	
+	void AUnitSet::removeUnit(AUnit *unit)
+	{
+		for (int i = m_units.size() - 1; i >= 0; i--) {
+			if (m_units[i] == unit) {
+				m_units.erase(m_units.begin() + i);
+				unit->setUnitSetNULL();
+				return;
+			}
+		}
+		AERR("Could not remove unit - not found : %s", unit->getFinalType().toString());
 	}
 
 
@@ -27,11 +51,6 @@ namespace Amorphis {
 			Broodwar->drawBoxScreen(m_drawPositionTL, m_drawPositionBR, Color(50, 50, 50), true);
 			Broodwar->drawBoxScreen(m_drawPositionTL, m_drawPositionBR, Color(200, 200, 200), false);
 			Broodwar->drawTextScreen(m_textPosition, "%s : %s (%d)", m_name.c_str(), m_type.c_str(), m_units.size());
-		}
-		if (DisplaySettings::UnitName) {
-			for (auto it = m_units.begin(); it != m_units.end(); it++) {
-				(*it)->draw();
-			}
 		}
 	}
 
