@@ -15,6 +15,7 @@ namespace Amorphis {
 		Strategy m_strategy;
 		void init();
 	public:
+		AmorphisMain();
 		void onFrame();
 		void draw() const;
 		void onUnitDiscover(BWAPI::Unit unit);

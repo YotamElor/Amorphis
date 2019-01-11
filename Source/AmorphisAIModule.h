@@ -7,9 +7,6 @@
 
 class AmorphisAIModule : public BWAPI::AIModule
 {
-	Amorphis::AmorphisMain *amorphisMain;
-
-
 public:
   // Virtual functions for callbacks, leave these as they are.
   virtual void onStart();
@@ -30,5 +27,7 @@ public:
   virtual void onSaveGame(std::string gameName);
   virtual void onUnitComplete(BWAPI::Unit unit);
   // Everything below this line is safe to modify.
+
+  Amorphis::AmorphisMain *amorphisMain;
 
 };

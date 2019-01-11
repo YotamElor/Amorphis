@@ -1,9 +1,11 @@
 #include "AmorphisMain.hpp"
 #include "Utils/Logger.hpp"
 #include "UnitsManager.hpp"
+#include "bwem/bwem.h"
 
 
 using namespace std;
+namespace { auto & theMap = BWEM::Map::Instance(); }
 
 
 namespace Amorphis {
@@ -32,6 +34,14 @@ namespace Amorphis {
 		m_strategy.draw();
 	}
 
+
+	AmorphisMain::AmorphisMain()
+	{
+		theMap.Initialize();
+		theMap.EnableAutomaticPathAnalysis();
+		bool startingLocationsOK = theMap.FindBasesForStartingLocations();
+		assert(startingLocationsOK);
+	}
 
 	void AmorphisMain::onFrame()
 	{

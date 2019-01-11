@@ -1,28 +1,20 @@
 #include "AmorphisAIModule.h"
 #include <iostream>
 #include "Utils/Logger.hpp"
-#include "bwem/bwem.h"
 
 
 using namespace BWAPI;
-using namespace Filter;
 using namespace Amorphis;
 using namespace std;
-namespace { auto & theMap = BWEM::Map::Instance(); }
 
 
 void AmorphisAIModule::onStart()
 {
 	Logger::getInstance()->init();
-	ALOG("The map is " + Broodwar->mapName());
+	ALOG(string("The map is ") + Broodwar->mapName().c_str());
 
 	Broodwar << "Map initialization..." << std::endl;
 	amorphisMain = new Amorphis::AmorphisMain();
-
-	theMap.Initialize();
-	theMap.EnableAutomaticPathAnalysis();
-	bool startingLocationsOK = theMap.FindBasesForStartingLocations();
-	assert(startingLocationsOK);
 
 	// Enable the UserInput flag, which allows us to control the bot and type messages.
 	Broodwar->enableFlag(Flag::UserInput);

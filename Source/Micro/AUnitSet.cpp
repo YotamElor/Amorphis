@@ -41,7 +41,7 @@ namespace Amorphis {
 				return;
 			}
 		}
-		AERR("Could not remove unit - not found : %s", unit->getFinalType().toString());
+		AERR(string("Could not remove unit - not found : ") + unit->getFinalType().toString());
 	}
 
 
