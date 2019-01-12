@@ -22,7 +22,7 @@ namespace Amorphis {
 
 	void AUnit::displayTarget() const
 	{
-		if (DisplaySettings::moveTarget && m_state == Move) {
+		if (DisplaySettings::MoveTarget && m_state == Move) {
 			Broodwar->drawCircleMap(m_targetPosition, 10, Color(50, 255, 50));
 		}
 	}

@@ -67,10 +67,10 @@ namespace Amorphis {
 
 	void Strategy::onFrame()
 	{
-		m_nextToBuild = None;
+		m_nextAction = PlanAction();
 		bool readMoreOfPlan = true;
 		if (!m_activePlan.empty()) {
-			for (int i = 0; i < m_activePlan.size(); i++) {
+			for (int i = 0; i < (int)m_activePlan.size(); i++) {
 				if (m_activePlan[i].blocking() && m_activePlan[i].trigger.check()) {
 					readMoreOfPlan = false;
 					break;
@@ -84,16 +84,7 @@ namespace Amorphis {
 		if (!m_activePlan.empty()) {
 			for (auto it = m_activePlan.begin(); it != m_activePlan.end(); ) {
 				if (it->trigger.check()) {
-					if (it->action.type() == PlanAction::PlanActionType::BuildUnit) {
-						m_nextToBuild = it->action.unitType();
-						if (m_lastBuilt != m_nextToBuild) {
-							ALOG(string("BuildUnit: trigger=") + it->trigger.toString() + string(" action=") + it->action.toString());
-						}
-						m_lastBuilt = m_nextToBuild;
-					}
-					else {
-						AERR(string("couldnt decipher it->action.type(): ") + to_string(it->action.type()));
-					}
+					m_nextAction = it->action;
 					break;
 				}
 				else {
@@ -105,15 +96,19 @@ namespace Amorphis {
 					}
 				}
 			}
-
 		}
 	}
 
 
 	void Strategy::draw() const
 	{
-		string s = string("next: ") + string(m_nextToBuild != NULL ? m_nextToBuild.toString() : "NONE");
-		Broodwar->drawTextScreen(Position(0,20), s.c_str());
+		if (DisplaySettings::Strategy) {
+			string s = m_nextAction.toString();
+			for (int i = 0; i < (int)m_activePlan.size(); i++) {
+				s += string("\n") + m_activePlan[i].trigger.toString() + string("\n==>") + m_activePlan[i].action.toString();
+			}
+			Broodwar->drawTextScreen(Position(120, 20), s.c_str());
+		}
 	}
 
 

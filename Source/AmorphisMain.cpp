@@ -56,17 +56,23 @@ namespace Amorphis {
 		}
 
 		m_strategy.onFrame();
-		UnitType nextToBuild = m_strategy.nextToBuild();
-		if (nextToBuild != NULL &&
-			Broodwar->self()->minerals() >= nextToBuild.mineralPrice() - UM->mineralDebt() &&
-			Broodwar->self()->gas() >= nextToBuild.gasPrice() - UM->gasDebt())
-		{
-			if (nextToBuild.isBuilding()) {
-				m_miningBases[0]->build(nextToBuild);
+		const PlanAction& action = m_strategy.nextAction();
+		if (action.type() == PlanAction::PlanActionType::NotSet) {
+		}
+		else if (action.type() == PlanAction::PlanActionType::BuildUnit) {
+			const UnitType unitType = action.unitType();
+			if (UM->availableMinerals() >= unitType.mineralPrice() && UM->availableGas() >= unitType.gasPrice())
+			{
+				if (unitType.isBuilding()) {
+					m_miningBases[0]->build(unitType);
+				}
+				else if (m_miningBases[0]->larvaCount()>0) {
+					m_miningBases[0]->morphLarva(unitType);
+				}
 			}
-			else {
-				m_miningBases[0]->morphLarva(nextToBuild);
-			}
+		}
+		else {
+			AERR(string("couldnt decipher it->action.type(): ") + to_string(action.type()));
 		}
 	}
 

@@ -7,13 +7,13 @@ namespace Amorphis {
 
 
 	class Strategy {
-		BWAPI::UnitType m_nextToBuild = BWAPI::UnitTypes::None, m_lastBuilt = BWAPI::UnitTypes::None;
+		PlanAction m_nextAction;
 		std::vector< std::pair<BWAPI::UnitType, int> > m_buildOrder;
 		planType m_plan, m_activePlan;
 	public:
 		Strategy();
 		void onFrame();
-		BWAPI::UnitType nextToBuild() const { return m_nextToBuild; }
+		const PlanAction& nextAction() const { return m_nextAction;  }
 		void draw() const;
 	};
 

@@ -39,7 +39,7 @@ namespace Amorphis {
 					s += it->first.toString() + std::string(" (") + std::to_string(it->second) + std::string(")\n");
 				}
 			}
-			Broodwar->drawTextScreen(Position(0, 50), s.c_str());
+			Broodwar->drawTextScreen(Position(0, 35), s.c_str());
 		}
 	};
 
@@ -53,7 +53,7 @@ namespace Amorphis {
 		UnitsCounter m_unitsCounter;
 		std::map<int, int> m_knownUnitIDs;
 		void setUnitSetsDrawPosition();
-		int m_mineralDebt, m_gasDebt;
+		int m_availableMinerals, m_availableGas;
 	public:
 		UnitsManager() {}
 		static UnitsManager* UnitsManager::getInstance();
@@ -65,8 +65,8 @@ namespace Amorphis {
 		void moveUnit(AUnitSet * s, AUnitSet * d, AUnit * u) const;
 		void draw();
 		const UnitsCounter& unitsCounter() const { return m_unitsCounter; }
-		int mineralDebt() const { return m_mineralDebt; }
-		int gasDebt() const { return m_gasDebt; }
+		int availableMinerals() const { return m_availableMinerals; }
+		int availableGas() const { return m_availableGas; }
 	};
 
 

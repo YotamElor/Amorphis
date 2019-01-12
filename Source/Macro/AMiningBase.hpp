@@ -15,6 +15,7 @@ namespace Amorphis {
 		std::string m_name;
 		std::vector<AMineralPatch> m_minerals;
 		int m_numGasWorkers;
+		BWAPI::Position m_drawPositionTL, m_drawPositionBR, m_textPosition;
 	public:
 		AMiningBase(const std::string &name, BWAPI::Unit resourceDepot);
 		void draw() const;
@@ -23,6 +24,7 @@ namespace Amorphis {
 		BWAPI::Unit getNextMineralPatch();
 		bool morphLarva(BWAPI::UnitType whatToBuild);
 		bool build(BWAPI::UnitType whatToBuild);
+		int larvaCount() const { return m_resourceDepot->getLarva().size(); }
 	};
 
 

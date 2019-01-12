@@ -18,7 +18,7 @@ namespace Amorphis {
 		virtual void onFrame_() {}
 
 	public:
-		static const int boxWidth = 200;
+		static const int boxWidth = 120;
 		static const int textHeight = 15;
 		static const int boxHeight = 2 * textHeight;
 
@@ -41,7 +41,8 @@ namespace Amorphis {
 		virtual void removeDead();
 		virtual void setDrawPosition(BWAPI::Position p);
 		virtual BWAPI::Position center() const;
-		BWAPI::UnitType type() const { return m_type;  }
+		BWAPI::UnitType type() const { return m_type; }
+		int size() const { return m_units.size(); }
 
 		virtual void draw() const;
 		virtual void onFrame();

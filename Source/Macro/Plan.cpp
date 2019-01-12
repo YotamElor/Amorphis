@@ -42,7 +42,14 @@ namespace Amorphis {
 
 	std::string PlanTrigger::toString() const
 	{
-		return string("(") + toString(m_type) + string(",") + m_unitType.toString() + string(",") + to_string(m_number) + string(")");
+		string s = "(";
+		switch (m_type)
+		{
+		case UnitsHaveLessThan: s += m_unitType.toString() + string("<=") + to_string(m_number); break;
+		case FreeSupplyLessThan: s += string("FreeSupply<=") + to_string(m_number); break;
+		}
+		s += string(")");
+		return s;
 	}
 
 

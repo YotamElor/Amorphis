@@ -82,7 +82,7 @@ namespace Amorphis {
 
 	void UnitsManager::setUnitSetsDrawPosition()
 	{
-		const Position startPos(100, 2);
+		const Position startPos(240, 2);
 		int i = 0;
 		for (auto itMap = m_unitSets.begin(); itMap != m_unitSets.end(); itMap++) {
 			for (auto itSet = itMap->second.begin(); itSet != itMap->second.end(); itSet++) {
@@ -103,8 +103,8 @@ namespace Amorphis {
 
 		// TODO: count units loaded into other units. see reference of Broodwar->self()->getUnits()
 		m_unitsCounter.clear();
-		m_mineralDebt = 0;
-		m_gasDebt = 0;
+		m_availableMinerals = Broodwar->self()->minerals();
+		m_availableGas = Broodwar->self()->gas();
 		for (auto it = m_allUnits.begin(); it != m_allUnits.end(); ) {
 			if (!(*it)->isAlive()) {
 				m_knownUnitIDs.erase((*it)->unit()->getID());
@@ -113,8 +113,8 @@ namespace Amorphis {
 			}
 			else {
 				m_unitsCounter.addUnit((*it)->getFinalType());
-				m_mineralDebt += (*it)->mineralDebt();
-				m_gasDebt += (*it)->gasDebt();
+				m_availableMinerals -= (*it)->mineralDebt();
+				m_availableGas -= (*it)->gasDebt();
 				it++;
 			}
 
@@ -143,16 +143,18 @@ namespace Amorphis {
 
 	void UnitsManager::draw()
 	{
-		string s = string("debt: m=") + to_string(m_mineralDebt) + string(" g=") + to_string(m_gasDebt);
-		Broodwar->drawTextScreen(Position(0, 35),  + s.c_str());
-		m_unitsCounter.draw();
-		for (auto itMap = m_unitSets.begin(); itMap != m_unitSets.end(); itMap++) {
-			for (auto itSet = itMap->second.begin(); itSet != itMap->second.end(); itSet++) {
-				(*itSet)->draw();
+		if (DisplaySettings::UnitsManager) {
+			string s = string("m=") + to_string(m_availableMinerals) + string(" g=") + to_string(m_availableGas);
+			Broodwar->drawTextScreen(Position(0, 20), +s.c_str());
+			m_unitsCounter.draw();
+			for (auto itMap = m_unitSets.begin(); itMap != m_unitSets.end(); itMap++) {
+				for (auto itSet = itMap->second.begin(); itSet != itMap->second.end(); itSet++) {
+					(*itSet)->draw();
+				}
 			}
-		}
-		for (auto it = m_allUnits.begin(); it != m_allUnits.end(); it++) {
-			(*it)->draw();
+			for (auto it = m_allUnits.begin(); it != m_allUnits.end(); it++) {
+				(*it)->draw();
+			}
 		}
 	}
 

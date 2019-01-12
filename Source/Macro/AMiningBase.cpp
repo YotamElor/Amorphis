@@ -33,6 +33,9 @@ namespace Amorphis {
 		if (m_baseBwem == NULL) {
 			AERR(string("m_base == NULL : ") + m_name);
 		}
+		m_drawPositionTL = Position(m_resourceDepot->getTilePosition()) + Position(55, 35);
+		m_drawPositionBR = m_drawPositionTL + Position(40, 40);
+		m_textPosition = m_drawPositionTL + Position(2, 0);
 
 		BWAPI::UnitType type;
 		if (Broodwar->self()->getRace() == Races::Protoss) {
@@ -55,9 +58,13 @@ namespace Amorphis {
 
 	void AMiningBase::draw() const
 	{
-		Broodwar->drawBoxMap(Position(m_resourceDepot->getTilePosition()), Position(m_resourceDepot->getTilePosition() + m_resourceDepot->getType().tileSize()), Color(200, 200, 200));
-		for (const AMineralPatch &m : m_minerals) {
-			m.draw();
+		if (DisplaySettings::UnitName) {
+			Broodwar->drawBoxMap(m_drawPositionTL, m_drawPositionBR, Color(50, 50, 50), true);
+			Broodwar->drawBoxMap(m_drawPositionTL, m_drawPositionBR, Color(200, 200, 200), false);
+			Broodwar->drawTextMap(m_textPosition, "M : %d\nG : %d\nL : %d", m_workers->size() - m_numGasWorkers, m_numGasWorkers, m_resourceDepot->getLarva().size());
+			for (const AMineralPatch &m : m_minerals) {
+				m.draw();
+			}
 		}
 	}
 
