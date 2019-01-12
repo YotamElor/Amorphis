@@ -113,6 +113,7 @@
     <ClCompile Include="Source\AmorphisAIModule.cpp" />
     <ClCompile Include="Source\Macro\AMineralPatch.cpp" />
     <ClCompile Include="Source\Macro\AMiningBase.cpp" />
+    <ClCompile Include="Source\Macro\Plan.cpp" />
     <ClCompile Include="Source\Macro\Strategy.cpp" />
     <ClCompile Include="Source\Micro\AUnit.cpp" />
     <ClCompile Include="Source\Micro\AUnitSet.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="Source\bwem\winutils.h" />
     <ClInclude Include="Source\Macro\AMineralPatch.hpp" />
     <ClInclude Include="Source\Macro\AMiningBase.hpp" />
+    <ClInclude Include="Source\Macro\Plan.hpp" />
     <ClInclude Include="Source\Macro\Strategy.hpp" />
     <ClInclude Include="Source\Micro\AUnit.hpp" />
     <ClInclude Include="Source\Micro\AUnitSet.hpp" />

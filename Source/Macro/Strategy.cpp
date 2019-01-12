@@ -14,34 +14,98 @@ namespace Amorphis {
 
 	Strategy::Strategy()
 	{
-		// initial units
-		m_buildOrder.push_back(make_pair(Zerg_Drone, 4));
-		m_buildOrder.push_back(make_pair(Zerg_Overlord, 1));
-		// build order
-		m_buildOrder.push_back(make_pair(Zerg_Drone, 5));
-		m_buildOrder.push_back(make_pair(Zerg_Overlord, 1));
-		m_buildOrder.push_back(make_pair(Zerg_Spawning_Pool, 1));
-		m_buildOrder.push_back(make_pair(Zerg_Extractor, 1));
-		m_buildOrder.push_back(make_pair(Zerg_Drone, 1));
-		m_buildOrder.push_back(make_pair(Zerg_Zergling, 6));
+		{
+			PlanItem planItem;
+			planItem.trigger.unitsHaveLessThan(Zerg_Drone, 9);
+			planItem.action.buildUnit(Zerg_Drone);
+			m_plan.push_back( planItem );
+		}
+		{
+			PlanItem planItem;
+			planItem.trigger.unitsHaveLessThan(Zerg_Overlord, 2);
+			planItem.action.buildUnit(Zerg_Overlord);
+			m_plan.push_back(planItem);
+		}
+		{
+			PlanItem planItem(true, false);
+			planItem.trigger.unitsHaveLessThan(Zerg_Spawning_Pool, 1);
+			planItem.action.buildUnit(Zerg_Spawning_Pool);
+			m_plan.push_back(planItem);
+		}
+		{
+			PlanItem planItem;
+			planItem.trigger.unitsHaveLessThan(Zerg_Drone, 9);
+			planItem.action.buildUnit(Zerg_Drone);
+			m_plan.push_back(planItem);
+		}
+		{
+			PlanItem planItem(true, false);
+			planItem.trigger.unitsHaveLessThan(Zerg_Extractor, 1);
+			planItem.action.buildUnit(Zerg_Extractor);
+			m_plan.push_back(planItem);
+		}
+		{
+			PlanItem planItem;
+			planItem.trigger.unitsHaveLessThan(Zerg_Drone, 10);
+			planItem.action.buildUnit(Zerg_Drone);
+			m_plan.push_back(planItem);
+		}
+		{
+			PlanItem planItem(false, false);
+			planItem.trigger.freeSupplyLessThan(1);
+			planItem.action.buildUnit(Zerg_Overlord);
+			m_plan.push_back(planItem);
+		}
+		{
+			PlanItem planItem;
+			planItem.trigger.unitsHaveLessThan(Zerg_Zergling, 100);
+			planItem.action.buildUnit(Zerg_Zergling);
+			m_plan.push_back(planItem);
+		}
 	}
 
 
 	void Strategy::onFrame()
 	{
 		m_nextToBuild = None;
-		std::map<BWAPI::UnitType, int> requiredUnitCount;
-		for (int i = 0; i < (int)m_buildOrder.size(); i++) {
-			if (requiredUnitCount.count(m_buildOrder[i].first) == 0) {
-				requiredUnitCount[m_buildOrder[i].first] = m_buildOrder[i].second;
+		bool readMoreOfPlan = true;
+		if (!m_activePlan.empty()) {
+			for (int i = 0; i < m_activePlan.size(); i++) {
+				if (m_activePlan[i].blocking() && m_activePlan[i].trigger.check()) {
+					readMoreOfPlan = false;
+					break;
+				}
 			}
-			else {
-				requiredUnitCount[m_buildOrder[i].first] += m_buildOrder[i].second;
+		}
+		if (readMoreOfPlan && !m_plan.empty()) {
+			m_activePlan.push_back(m_plan[0]);
+			m_plan.erase(m_plan.begin());
+		}
+		if (!m_activePlan.empty()) {
+			for (auto it = m_activePlan.begin(); it != m_activePlan.end(); ) {
+				if (it->trigger.check()) {
+					if (it->action.type() == PlanAction::PlanActionType::BuildUnit) {
+						m_nextToBuild = it->action.unitType();
+						if (m_lastBuilt != m_nextToBuild) {
+							ALOG(string("BuildUnit: trigger=") + it->trigger.toString() + string(" action=") + it->action.toString());
+						}
+						m_lastBuilt = m_nextToBuild;
+					}
+					else {
+						AERR(string("couldnt decipher it->action.type(): ") + to_string(it->action.type()));
+					}
+					break;
+				}
+				else {
+					if (it->removeWhenDone()) {
+						it = m_activePlan.erase(it);
+					}
+					else {
+						it++;
+					}
+				}
 			}
-			if (UM->unitsCounter().getCounter(m_buildOrder[i].first) < requiredUnitCount[m_buildOrder[i].first]) {
-				m_nextToBuild = m_buildOrder[i].first;
-				break;
-			}
+
 		}
 	}
 

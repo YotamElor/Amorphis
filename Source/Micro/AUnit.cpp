@@ -80,7 +80,8 @@ namespace Amorphis {
 		case GatherGas: return "(GG)"; break;
 		case Build: return "(B)"; break;
 		}
-		return "Error convert state to string";
+		AERR(string("Error convert state to string") + to_string(state));
+		return "";
 	}
 
 

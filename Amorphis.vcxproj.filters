@@ -95,6 +95,9 @@
     <ClCompile Include="Source\Macro\Strategy.cpp">
       <Filter>Macro</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Macro\Plan.cpp">
+      <Filter>Macro</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\UnitsManager.hpp" />
@@ -194,6 +197,9 @@
       <Filter>Macro</Filter>
     </ClInclude>
     <ClInclude Include="Source\Macro\Strategy.hpp">
+      <Filter>Macro</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Macro\Plan.hpp">
       <Filter>Macro</Filter>
     </ClInclude>
   </ItemGroup>

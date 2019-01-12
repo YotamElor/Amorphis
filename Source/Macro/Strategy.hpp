@@ -1,15 +1,15 @@
 #pragma once
 #include <BWAPI.h>
-#include <vector>
+#include "Plan.hpp"
 
 
 namespace Amorphis {
 
 
 	class Strategy {
-		std::map<BWAPI::UnitType, int> m_unitsCounter;
-		BWAPI::UnitType m_nextToBuild = NULL;
+		BWAPI::UnitType m_nextToBuild = BWAPI::UnitTypes::None, m_lastBuilt = BWAPI::UnitTypes::None;
 		std::vector< std::pair<BWAPI::UnitType, int> > m_buildOrder;
+		planType m_plan, m_activePlan;
 	public:
 		Strategy();
 		void onFrame();
