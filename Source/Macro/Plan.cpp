@@ -19,6 +19,8 @@ namespace Amorphis {
 		{
 		case NotSet: return "NotSet"; break;
 		case UnitsHaveLessThan: return "UnitsHaveLessThan"; break;
+		case UnitsHaveMoreThan: return "UnitsHaveMoreThan"; break;
+		case FinishedHaveMoreThan: return "FinishedHaveMoreThan"; break;
 		case FreeSupplyLessThan: return "FreeSupplyLessThan"; break;
 		}
 		AERR(string("Error convert PlanTriggerType to string") + to_string(type));
@@ -30,6 +32,12 @@ namespace Amorphis {
 	{
 		if (m_type == UnitsHaveLessThan) {
 			return UM->unitsCounter().getCounter(m_unitType) < m_number;
+		}
+		else if (m_type == UnitsHaveMoreThan) {
+			return UM->unitsCounter().getCounter(m_unitType) > m_number;
+		}
+		else if (m_type == FinishedHaveMoreThan) {
+			return UM->finishedUnitsCounter().getCounter(m_unitType) > m_number;
 		}
 		else if (m_type == FreeSupplyLessThan) {
 			return Broodwar->self()->supplyTotal() - Broodwar->self()->supplyUsed() < m_number;
@@ -45,8 +53,10 @@ namespace Amorphis {
 		string s = "(";
 		switch (m_type)
 		{
-		case UnitsHaveLessThan: s += m_unitType.toString() + string("<=") + to_string(m_number); break;
+		case UnitsHaveLessThan: s += m_unitType.toString() + string("<") + to_string(m_number); break;
+		case UnitsHaveMoreThan: s += m_unitType.toString() + string(">") + to_string(m_number); break;
 		case FreeSupplyLessThan: s += string("FreeSupply<=") + to_string(m_number); break;
+		case FinishedHaveMoreThan: s += m_unitType.toString() + string("(f)>") + to_string(m_number); break;
 		}
 		s += string(")");
 		return s;
@@ -65,6 +75,7 @@ namespace Amorphis {
 		{
 		case NotSet: return "NotSet"; break;
 		case BuildUnit: return "BuildUnit"; break;
+		case NumGasWorkers: return "NumGasWorkers"; break;
 		}
 		AERR(string("Error convert PlanActionType to string") + to_string(type));
 		return "";

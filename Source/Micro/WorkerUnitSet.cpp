@@ -18,6 +18,39 @@ namespace Amorphis {
 				AERR("m_miningBase == NULL");
 			}
 
+			bool hasFinisedRefinery = false;
+			for (auto g : m_miningBase->gysers()) {
+				if (g->getType() != UnitTypes::Resource_Vespene_Geyser) {
+					hasFinisedRefinery = true;
+				}
+			}
+			if (hasFinisedRefinery) {
+				int numGasWorkers = 0;
+				for (AUnit *unit : m_units) {
+					numGasWorkers += unit->state() == AUnit::GatherGas;
+				}
+				while (numGasWorkers > m_numGasWorkers) {
+					for (AUnit *unit : m_units) {
+						if (unit->state() == AUnit::GatherGas) {
+							unit->stop();
+							numGasWorkers--;
+							Broodwar->sendText("gas worker removed, num gas workers: %d / %d", numGasWorkers, m_numGasWorkers);
+							break;
+						}
+					}
+				}
+				while (numGasWorkers < m_numGasWorkers) {
+					for (AUnit *unit : m_units) {
+						if (unit->state() != AUnit::GatherGas) {
+							unit->gather(m_miningBase->gysers()[0]);
+							numGasWorkers++;
+							Broodwar->sendText("gas worker added %d, num gas workers: %d / %d", unit->unit()->getID(), numGasWorkers, m_numGasWorkers);
+							break;
+						}
+					}
+				}
+			}
+
 			for (AUnit *unit : m_units) {
 				if (unit->state() == AUnit::Idle) {
 					unit->gather(m_miningBase->getNextMineralPatch());

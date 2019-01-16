@@ -34,6 +34,21 @@ namespace Amorphis {
 		displayTarget();
 	}
 
+	BWAPI::UnitType AUnit::getType() const { 
+		if (m_unit->getType().isBuilding() && m_unit->getRemainingBuildTime() > 0) {
+			return UnitTypes::None;
+		}
+		return m_unit->getType();
+	}
+
+
+	BWAPI::UnitType AUnit::getFinalType() const {
+		if (m_unit->getType() == BWAPI::UnitTypes::Zerg_Egg) {
+			return m_unit->getLastCommand().getUnitType();
+		}
+		return m_unit->getType();
+	}
+
 
 	void AUnit::attack(BWAPI::Unit unit)
 	{

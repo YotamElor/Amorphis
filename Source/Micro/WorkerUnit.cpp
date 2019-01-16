@@ -14,18 +14,34 @@ namespace Amorphis {
 	void WorkerUnit::gather(BWAPI::Unit unit)
 	{
 		m_targetUnit = unit;
-		m_state = GatherMinerals;
+		if (unit->getType() == UnitTypes::Resource_Mineral_Field) {
+			m_state = GatherMinerals;
+		}
+		else if (unit->getType().isRefinery()) {
+			m_state = GatherGas;
+		}
+		else {
+			AERR(("WorkerUnit::gather type = ") + unit->getType().toString());
+		}
 	}
 
 
 	void WorkerUnit::onFrame_()
 	{
 		if (m_state == GatherMinerals) {
-			if (!m_unit->isGatheringMinerals() || (m_unit->getOrderTarget()!=NULL && m_unit->getOrderTarget()->getType()== UnitTypes::Enum::Resource_Mineral_Field && m_unit->getOrderTarget() != m_targetUnit)) {
+			if (m_targetUnit == NULL || !m_targetUnit->exists()) {
+				stop();
+			}
+			else if (!m_unit->isGatheringMinerals() || m_unit->getOrderTarget()==NULL || (!m_unit->getOrderTarget()->getType().isResourceDepot() && m_unit->getOrderTarget() != m_targetUnit)) {
 				m_unit->gather(m_targetUnit);
 			}
-			else if (m_targetUnit==NULL || !m_targetUnit->exists()){
+		}
+		else if (m_state == GatherGas) {
+			if (m_targetUnit == NULL || !m_targetUnit->exists()) {
 				stop();
+			}
+			else if (!m_unit->isGatheringGas() || m_unit->getOrderTarget() == NULL || (!m_unit->getOrderTarget()->getType().isResourceDepot() && m_unit->getOrderTarget() != m_targetUnit)) {
+				m_unit->gather(m_targetUnit);
 			}
 		}
 		else if (m_state == Build) {

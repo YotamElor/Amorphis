@@ -103,6 +103,7 @@ namespace Amorphis {
 
 		// TODO: count units loaded into other units. see reference of Broodwar->self()->getUnits()
 		m_unitsCounter.clear();
+		m_finishedUnitsCounter.clear();
 		m_availableMinerals = Broodwar->self()->minerals();
 		m_availableGas = Broodwar->self()->gas();
 		for (auto it = m_allUnits.begin(); it != m_allUnits.end(); ) {
@@ -112,6 +113,8 @@ namespace Amorphis {
 				it = m_allUnits.erase(it);
 			}
 			else {
+				m_finishedUnitsCounter.addUnit((*it)->getType());
+				m_unitsCounter.addKey((*it)->getType());
 				m_unitsCounter.addUnit((*it)->getFinalType());
 				m_availableMinerals -= (*it)->mineralDebt();
 				m_availableGas -= (*it)->gasDebt();
@@ -146,7 +149,7 @@ namespace Amorphis {
 		if (DisplaySettings::UnitsManager) {
 			string s = string("m=") + to_string(m_availableMinerals) + string(" g=") + to_string(m_availableGas);
 			Broodwar->drawTextScreen(Position(0, 20), +s.c_str());
-			m_unitsCounter.draw();
+			m_unitsCounter.draw(m_finishedUnitsCounter);
 			for (auto itMap = m_unitSets.begin(); itMap != m_unitSets.end(); itMap++) {
 				for (auto itSet = itMap->second.begin(); itSet != itMap->second.end(); itSet++) {
 					(*itSet)->draw();

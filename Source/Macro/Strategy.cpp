@@ -39,9 +39,21 @@ namespace Amorphis {
 			m_plan.push_back(planItem);
 		}
 		{
-			PlanItem planItem(true, false);
+			PlanItem planItem(true, true);
 			planItem.trigger.unitsHaveLessThan(Zerg_Extractor, 1);
 			planItem.action.buildUnit(Zerg_Extractor);
+			m_plan.push_back(planItem);
+		}
+		{
+			PlanItem planItem(false, false, true);
+			planItem.trigger.finishedHaveMoreThan(Zerg_Extractor, 0);
+			planItem.action.numGasWorkers(3);
+			m_plan.push_back(planItem);
+		}
+		{
+			PlanItem planItem(false, false, true);
+			planItem.trigger.finishedHaveMoreThan(Zerg_Extractor, 0);
+			planItem.action.numGasWorkers(3);
 			m_plan.push_back(planItem);
 		}
 		{
@@ -85,6 +97,9 @@ namespace Amorphis {
 			for (auto it = m_activePlan.begin(); it != m_activePlan.end(); ) {
 				if (it->trigger.check()) {
 					m_nextAction = it->action;
+					if (it->doOnce()) {
+						it = m_activePlan.erase(it);
+					}
 					break;
 				}
 				else {

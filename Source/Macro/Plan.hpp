@@ -9,7 +9,7 @@ namespace Amorphis {
 
 	class PlanTrigger {
 	public:
-		enum PlanTriggerType { NotSet=0, UnitsHaveLessThan=1, FreeSupplyLessThan=2 };
+		enum PlanTriggerType { NotSet=0, UnitsHaveLessThan=1, UnitsHaveMoreThan=2, FreeSupplyLessThan=3, FinishedHaveMoreThan=4	};
 		const char* toString(PlanTriggerType type) const;
 	private:
 		PlanTriggerType m_type = NotSet;
@@ -18,6 +18,16 @@ namespace Amorphis {
 	public:
 		void unitsHaveLessThan(BWAPI::UnitType unitType, int number) {
 			m_type = UnitsHaveLessThan;
+			m_unitType = unitType;
+			m_number = number;
+		}
+		void unitsHaveMoreThan(BWAPI::UnitType unitType, int number) {
+			m_type = UnitsHaveMoreThan;
+			m_unitType = unitType;
+			m_number = number;
+		}
+		void finishedHaveMoreThan(BWAPI::UnitType unitType, int number) {
+			m_type = FinishedHaveMoreThan;
 			m_unitType = unitType;
 			m_number = number;
 		}
@@ -32,30 +42,37 @@ namespace Amorphis {
 
 	class PlanAction {
 	public:
-		enum PlanActionType { NotSet=0, BuildUnit=1 };
+		enum PlanActionType { NotSet=0, BuildUnit=1, NumGasWorkers=2 };
 		const char* toString(PlanActionType type) const;
 	private:
 		PlanActionType m_type = NotSet;
 		BWAPI::UnitType m_unitType = BWAPI::UnitTypes::None;
+		int m_number = 0;
 	public:
 		void buildUnit(BWAPI::UnitType unitType) {
 			m_type = BuildUnit;
 			m_unitType = unitType;
 		}
+		void numGasWorkers(int number) {
+			m_type = NumGasWorkers;
+			m_number = number;
+		}
 		PlanActionType type() const { return m_type; }
 		BWAPI::UnitType unitType() const { return m_unitType;  }
+		int number() const { return m_number; }
 		std::string toString() const;
 	};
 
 
 	class PlanItem {
-		bool m_blocking, m_removeWhenDone;
+		bool m_blocking, m_removeWhenDone, m_doOnce;
 	public:
-		PlanItem(bool blocking = true, bool removeWhenDone = true) : m_blocking(blocking), m_removeWhenDone(removeWhenDone) {}
+		PlanItem(bool blocking = true, bool removeWhenDone = true, bool doOnce = false) : m_blocking(blocking), m_removeWhenDone(removeWhenDone), m_doOnce(doOnce) {}
 		PlanTrigger trigger;
 		PlanAction action;
 		bool blocking() const { return m_blocking; }
 		bool removeWhenDone() const { return m_removeWhenDone; }
+		bool doOnce() const { return m_doOnce; }
 	};
 
 

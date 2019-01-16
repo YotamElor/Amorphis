@@ -50,8 +50,8 @@ namespace Amorphis {
 		void setUnitSetNULL() { m_unitSet = NULL;  }
 
 		virtual void draw() const;
-		virtual BWAPI::UnitType getType() const { return m_unit->getType(); }
-		virtual BWAPI::UnitType getFinalType() const { return (m_unit->getType() == BWAPI::UnitTypes::Zerg_Egg) ? m_unit->getLastCommand().getUnitType() : getType(); }
+		virtual BWAPI::UnitType getType() const;
+		virtual BWAPI::UnitType getFinalType() const;
 		int mineralDebt() const { return m_mineralDebt; }
 		int gasDebt() const { return m_gasDebt; }
 

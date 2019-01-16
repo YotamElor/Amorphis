@@ -71,6 +71,9 @@ namespace Amorphis {
 				}
 			}
 		}
+		else if (action.type() == PlanAction::PlanActionType::NumGasWorkers) {
+			m_miningBases[0]->setNumGasWorkers(action.number());
+		}
 		else {
 			AERR(string("couldnt decipher it->action.type(): ") + to_string(action.type()));
 		}

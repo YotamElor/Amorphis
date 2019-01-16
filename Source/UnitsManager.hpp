@@ -24,6 +24,11 @@ namespace Amorphis {
 			}
 			m_map[unitType]++;
 		}
+		void addKey(BWAPI::UnitType unitType) {
+			if (m_map.find(unitType) == m_map.end()) {
+				m_map[unitType] = 0;
+			}
+		}
 		int getCounter(BWAPI::UnitType unitType) const
 		{
 			if (m_map.find(unitType) == m_map.end()) {
@@ -31,12 +36,12 @@ namespace Amorphis {
 			}
 			return m_map.find(unitType)->second;
 		}
-		void draw() const
+		void draw(const UnitsCounter& secondCounter) const
 		{
 			std::string s = "";
 			for (auto it = m_map.begin(); it != m_map.end(); it++) {
 				if (it->second > 0) {
-					s += it->first.toString() + std::string(" (") + std::to_string(it->second) + std::string(")\n");
+					s += it->first.toString() + std::string(" (") + std::to_string(secondCounter.getCounter(it->first)) + std::string("/") + std::to_string(it->second) + std::string(")\n");
 				}
 			}
 			Broodwar->drawTextScreen(Position(0, 35), s.c_str());
@@ -50,7 +55,7 @@ namespace Amorphis {
 		static UnitsManager* m_instance;
 		std::set<AUnit*> m_allUnits;
 		std::map<BWAPI::UnitType, std::set<AUnitSet*>> m_unitSets;
-		UnitsCounter m_unitsCounter;
+		UnitsCounter m_unitsCounter, m_finishedUnitsCounter;
 		std::map<int, int> m_knownUnitIDs;
 		void setUnitSetsDrawPosition();
 		int m_availableMinerals, m_availableGas;
@@ -65,6 +70,7 @@ namespace Amorphis {
 		void moveUnit(AUnitSet * s, AUnitSet * d, AUnit * u) const;
 		void draw();
 		const UnitsCounter& unitsCounter() const { return m_unitsCounter; }
+		const UnitsCounter& finishedUnitsCounter() const { return m_finishedUnitsCounter; }
 		int availableMinerals() const { return m_availableMinerals; }
 		int availableGas() const { return m_availableGas; }
 	};

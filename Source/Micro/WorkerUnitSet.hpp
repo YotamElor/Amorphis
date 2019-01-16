@@ -21,6 +21,8 @@ namespace Amorphis {
 		virtual void draw() const;
 		void gather(AMiningBase* miningBase, const int numGasWorkers);
 		void build(BWAPI::UnitType unitType, BWAPI::TilePosition tilePosition);
+		void setNumGasWorkers(int numGasWorkers) { m_numGasWorkers = numGasWorkers; }
+		int numGasWorkers() const { return m_numGasWorkers; }
 	};
 
 

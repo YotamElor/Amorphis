@@ -19,7 +19,7 @@ namespace { auto & theMap = BWEM::Map::Instance(); }
 namespace Amorphis {
 
 
-	AMiningBase::AMiningBase(const std::string &name, BWAPI::Unit resourceDepot) : m_name(name), m_numGasWorkers(0)
+	AMiningBase::AMiningBase(const std::string &name, BWAPI::Unit resourceDepot) : m_name(name)
 	{
 		m_resourceDepot = resourceDepot;
 
@@ -46,13 +46,17 @@ namespace Amorphis {
 			type = UnitTypes::Enum::Zerg_Drone;
 		}
 		m_workers = new WorkerUnitSet(m_name, type);
-		m_workers->gather(this, m_numGasWorkers);
+		m_workers->gather(this, 0);
 		UM->addUnitSet(m_workers);
 
 		for (const Mineral *m : m_baseBwem->Minerals()) {
 			m_minerals.push_back( AMineralPatch(m->Unit(), m_resourceDepot->getDistance(m->Unit())) );
 		}
 		sort(m_minerals.begin(), m_minerals.end(), &AMineralPatchCmp);
+
+		for (const Geyser *g : m_baseBwem->Geysers()) {
+			m_gasGysers.push_back(g->Unit());
+		}
 	}
 
 
@@ -61,7 +65,7 @@ namespace Amorphis {
 		if (DisplaySettings::UnitName) {
 			Broodwar->drawBoxMap(m_drawPositionTL, m_drawPositionBR, Color(50, 50, 50), true);
 			Broodwar->drawBoxMap(m_drawPositionTL, m_drawPositionBR, Color(200, 200, 200), false);
-			Broodwar->drawTextMap(m_textPosition, "M : %d\nG : %d\nL : %d", m_workers->size() - m_numGasWorkers, m_numGasWorkers, m_resourceDepot->getLarva().size());
+			Broodwar->drawTextMap(m_textPosition, "M : %d\nG : %d\nL : %d", m_workers->size() - m_workers->numGasWorkers(), m_workers->numGasWorkers(), m_resourceDepot->getLarva().size());
 			for (const AMineralPatch &m : m_minerals) {
 				m.draw();
 			}
