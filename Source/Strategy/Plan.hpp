@@ -42,15 +42,21 @@ namespace Amorphis {
 
 	class PlanAction {
 	public:
-		enum PlanActionType { NotSet=0, BuildUnit=1, NumGasWorkers=2 };
+		enum PlanActionType { NotSet=0, BuildUnit=1, NumGasWorkers=2, BuildBuilding=3};
 		const char* toString(PlanActionType type) const;
 	private:
 		PlanActionType m_type = NotSet;
 		BWAPI::UnitType m_unitType = BWAPI::UnitTypes::None;
+		BWAPI::TilePosition m_tilePosition;
 		int m_number = 0;
 	public:
 		void buildUnit(BWAPI::UnitType unitType) {
 			m_type = BuildUnit;
+			m_unitType = unitType;
+		}
+		void buildBuilding(BWAPI::UnitType unitType, BWAPI::TilePosition tilePosition) {
+			m_type = BuildBuilding;
+			m_tilePosition = tilePosition;
 			m_unitType = unitType;
 		}
 		void numGasWorkers(int number) {
@@ -60,6 +66,7 @@ namespace Amorphis {
 		PlanActionType type() const { return m_type; }
 		BWAPI::UnitType unitType() const { return m_unitType;  }
 		int number() const { return m_number; }
+		BWAPI::TilePosition tilePosition() const { return m_tilePosition; }
 		std::string toString() const;
 	};
 

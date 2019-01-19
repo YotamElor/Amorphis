@@ -92,11 +92,14 @@
     <ClCompile Include="Source\Macro\AMineralPatch.cpp">
       <Filter>Macro</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Macro\Strategy.cpp">
-      <Filter>Macro</Filter>
+    <ClCompile Include="Source\Strategy\Plan.cpp">
+      <Filter>Strategy</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Macro\Plan.cpp">
-      <Filter>Macro</Filter>
+    <ClCompile Include="Source\Strategy\Strategy.cpp">
+      <Filter>Strategy</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Strategy\AMap.cpp">
+      <Filter>Strategy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -196,11 +199,14 @@
     <ClInclude Include="Source\Macro\AMineralPatch.hpp">
       <Filter>Macro</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Macro\Strategy.hpp">
-      <Filter>Macro</Filter>
+    <ClInclude Include="Source\Strategy\Plan.hpp">
+      <Filter>Strategy</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Macro\Plan.hpp">
-      <Filter>Macro</Filter>
+    <ClInclude Include="Source\Strategy\Strategy.hpp">
+      <Filter>Strategy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Strategy\AMap.hpp">
+      <Filter>Strategy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -215,6 +221,9 @@
     </Filter>
     <Filter Include="Macro">
       <UniqueIdentifier>{4d6674d9-16b4-4b2b-82c5-401f9238a4ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strategy">
+      <UniqueIdentifier>{8474b86d-4706-47fd-ada4-6cdce008da75}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

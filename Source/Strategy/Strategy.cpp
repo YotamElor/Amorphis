@@ -14,6 +14,13 @@ namespace Amorphis {
 
 	Strategy::Strategy()
 	{
+
+	}
+
+
+	void Strategy::init()
+	{
+		m_map.init();
 		{
 			PlanItem planItem;
 			planItem.trigger.unitsHaveLessThan(Zerg_Drone, 9);
@@ -27,9 +34,9 @@ namespace Amorphis {
 			m_plan.push_back(planItem);
 		}
 		{
-			PlanItem planItem(true, false);
+			PlanItem planItem;
 			planItem.trigger.unitsHaveLessThan(Zerg_Spawning_Pool, 1);
-			planItem.action.buildUnit(Zerg_Spawning_Pool);
+			planItem.action.buildBuilding(Zerg_Spawning_Pool, TilePosition(0,0));
 			m_plan.push_back(planItem);
 		}
 		{
@@ -38,6 +45,13 @@ namespace Amorphis {
 			planItem.action.buildUnit(Zerg_Drone);
 			m_plan.push_back(planItem);
 		}
+		{
+			PlanItem planItem;
+			planItem.trigger.unitsHaveLessThan(Zerg_Hatchery, 2);
+			planItem.action.buildBuilding(Zerg_Hatchery, m_map.nextExpansionPosition());
+			m_plan.push_back(planItem);
+		}
+		return;
 		{
 			PlanItem planItem(true, true);
 			planItem.trigger.unitsHaveLessThan(Zerg_Extractor, 1);
@@ -124,6 +138,7 @@ namespace Amorphis {
 			}
 			Broodwar->drawTextScreen(Position(120, 20), s.c_str());
 		}
+		m_map.draw();
 	}
 
 

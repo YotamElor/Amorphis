@@ -82,7 +82,7 @@ namespace Amorphis {
 
 	void UnitsManager::setUnitSetsDrawPosition()
 	{
-		const Position startPos(240, 2);
+		const Position startPos(280, 2);
 		int i = 0;
 		for (auto itMap = m_unitSets.begin(); itMap != m_unitSets.end(); itMap++) {
 			for (auto itSet = itMap->second.begin(); itSet != itMap->second.end(); itSet++) {

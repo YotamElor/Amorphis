@@ -13,6 +13,7 @@ namespace Amorphis {
 		static const bool MoveTarget = DisplayOn && true;
 		static const bool UnitsManager = DisplayOn && true;
 		static const bool Strategy = DisplayOn && true;
+		static const bool Map = DisplayOn && true;
 	};
 
 

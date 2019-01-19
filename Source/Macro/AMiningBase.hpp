@@ -24,7 +24,7 @@ namespace Amorphis {
 		const std::vector<BWAPI::Unit>& gysers() const { return m_gasGysers; }
 		BWAPI::Unit getNextMineralPatch();
 		bool morphLarva(BWAPI::UnitType whatToBuild);
-		bool build(BWAPI::UnitType whatToBuild);
+		bool build(BWAPI::UnitType whatToBuild, BWAPI::TilePosition tilePosition);
 		int larvaCount() const { return m_resourceDepot->getLarva().size(); }
 		void setNumGasWorkers(int numGasWorkers) { m_workers->setNumGasWorkers(numGasWorkers); }
 	};

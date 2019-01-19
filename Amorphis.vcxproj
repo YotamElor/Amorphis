@@ -113,8 +113,6 @@
     <ClCompile Include="Source\AmorphisAIModule.cpp" />
     <ClCompile Include="Source\Macro\AMineralPatch.cpp" />
     <ClCompile Include="Source\Macro\AMiningBase.cpp" />
-    <ClCompile Include="Source\Macro\Plan.cpp" />
-    <ClCompile Include="Source\Macro\Strategy.cpp" />
     <ClCompile Include="Source\Micro\AUnit.cpp" />
     <ClCompile Include="Source\Micro\AUnitSet.cpp" />
     <ClCompile Include="Source\Micro\EnemyUnitSet.cpp" />
@@ -123,6 +121,9 @@
     <ClCompile Include="Source\Micro\RangedUnitSet.cpp" />
     <ClCompile Include="Source\Micro\WorkerUnit.cpp" />
     <ClCompile Include="Source\Micro\WorkerUnitSet.cpp" />
+    <ClCompile Include="Source\Strategy\AMap.cpp" />
+    <ClCompile Include="Source\Strategy\Plan.cpp" />
+    <ClCompile Include="Source\Strategy\Strategy.cpp" />
     <ClCompile Include="Source\UnitsManager.cpp" />
     <ClCompile Include="Source\Utils\Geometry.cpp" />
     <ClCompile Include="Source\Utils\Logger.cpp" />
@@ -150,8 +151,6 @@
     <ClInclude Include="Source\bwem\winutils.h" />
     <ClInclude Include="Source\Macro\AMineralPatch.hpp" />
     <ClInclude Include="Source\Macro\AMiningBase.hpp" />
-    <ClInclude Include="Source\Macro\Plan.hpp" />
-    <ClInclude Include="Source\Macro\Strategy.hpp" />
     <ClInclude Include="Source\Micro\AUnit.hpp" />
     <ClInclude Include="Source\Micro\AUnitSet.hpp" />
     <ClInclude Include="Source\Micro\EnemyUnitSet.hpp" />
@@ -160,6 +159,9 @@
     <ClInclude Include="Source\Micro\RangedUnitSet.hpp" />
     <ClInclude Include="Source\Micro\WorkerUnit.hpp" />
     <ClInclude Include="Source\Micro\WorkerUnitSet.hpp" />
+    <ClInclude Include="Source\Strategy\AMap.hpp" />
+    <ClInclude Include="Source\Strategy\Plan.hpp" />
+    <ClInclude Include="Source\Strategy\Strategy.hpp" />
     <ClInclude Include="Source\UnitsManager.hpp" />
     <ClInclude Include="Source\Utils\DisplaySettings.hpp" />
     <ClInclude Include="Source\Utils\Geometry.hpp" />

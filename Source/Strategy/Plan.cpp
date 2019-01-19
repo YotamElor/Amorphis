@@ -76,6 +76,7 @@ namespace Amorphis {
 		case NotSet: return "NotSet"; break;
 		case BuildUnit: return "BuildUnit"; break;
 		case NumGasWorkers: return "NumGasWorkers"; break;
+		case BuildBuilding: return "BuildBuilding"; break;
 		}
 		AERR(string("Error convert PlanActionType to string") + to_string(type));
 		return "";

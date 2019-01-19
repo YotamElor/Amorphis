@@ -45,7 +45,12 @@ namespace Amorphis {
 			}
 		}
 		else if (m_state == Build) {
-			m_unit->build(m_targetUnitType, m_targetTilePosition);
+			if (m_unit->getDistance(Position(m_targetTilePosition)) > 100) {
+				m_unit->move(Position(m_targetTilePosition));
+			}
+			else {
+				m_unit->build(m_targetUnitType, m_targetTilePosition);
+			}
 		}
 	}
 

@@ -1,7 +1,7 @@
 #pragma once
 #include <BWAPI.h>
 #include "Macro/AMiningBase.hpp"
-#include "Macro/Strategy.hpp"
+#include "Strategy/Strategy.hpp"
 
 
 using namespace BWAPI;

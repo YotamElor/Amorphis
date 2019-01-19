@@ -108,9 +108,11 @@ namespace Amorphis {
 	}
 
 
-	bool AMiningBase::build(BWAPI::UnitType whatToBuild)
+	bool AMiningBase::build(BWAPI::UnitType whatToBuild, BWAPI::TilePosition tilePosition)
 	{
-		const TilePosition buildTile = Broodwar->getBuildLocation(whatToBuild, m_resourceDepot->getTilePosition());
+		const TilePosition buildTile = (tilePosition.x == 0 && tilePosition.y == 0)
+			? Broodwar->getBuildLocation(whatToBuild, m_resourceDepot->getTilePosition())
+			: Broodwar->getBuildLocation(whatToBuild, tilePosition);
 		m_workers->build(whatToBuild, buildTile);
 		return false;
 	}

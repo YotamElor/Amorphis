@@ -22,6 +22,7 @@ namespace Amorphis {
 		if (m_miningBases.size() != 1) {
 			AERR("m_miningBases.size() != 1");
 		}
+		m_strategy.init();
 	}
 
 
@@ -41,14 +42,11 @@ namespace Amorphis {
 		theMap.EnableAutomaticPathAnalysis();
 		bool startingLocationsOK = theMap.FindBasesForStartingLocations();
 		assert(startingLocationsOK);
+		init();
 	}
 
 	void AmorphisMain::onFrame()
 	{
-		if (Broodwar->getFrameCount() == 0) {
-			init();
-		}
-
 		UM->onFrame();
 
 		for (auto miningBase : m_miningBases) {
@@ -61,14 +59,22 @@ namespace Amorphis {
 		}
 		else if (action.type() == PlanAction::PlanActionType::BuildUnit) {
 			const UnitType unitType = action.unitType();
+			if (unitType.isBuilding()) {
+				AERR("unitType.isBuilding()");
+			}
 			if (UM->availableMinerals() >= unitType.mineralPrice() && UM->availableGas() >= unitType.gasPrice())
 			{
-				if (unitType.isBuilding()) {
-					m_miningBases[0]->build(unitType);
-				}
-				else if (m_miningBases[0]->larvaCount()>0) {
-					m_miningBases[0]->morphLarva(unitType);
-				}
+				m_miningBases[0]->morphLarva(unitType);
+			}
+		}
+		else if (action.type() == PlanAction::PlanActionType::BuildBuilding) {
+			const UnitType unitType = action.unitType();
+			if (!unitType.isBuilding()) {
+				AERR("!unitType.isBuilding()");
+			}
+			if (UM->availableMinerals() >= unitType.mineralPrice() && UM->availableGas() >= unitType.gasPrice())
+			{
+				m_miningBases[0]->build(unitType, action.tilePosition());
 			}
 		}
 		else if (action.type() == PlanAction::PlanActionType::NumGasWorkers) {
