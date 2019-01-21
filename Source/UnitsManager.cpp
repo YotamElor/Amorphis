@@ -4,6 +4,8 @@
 
 
 using namespace std;
+using namespace BWAPI;
+using namespace BWAPI::UnitTypes;
 
 
 namespace Amorphis {
@@ -27,7 +29,17 @@ namespace Amorphis {
 			return;
 		}
 		m_initialized = true;
-		addUnitSet(new AUnitSet("None", UnitTypes::None));
+		addUnitSet(new AUnitSet("None", None));
+
+		if (Broodwar->self()->getRace() == Races::Zerg) {
+			m_workerType = Zerg_Drone;
+		}
+		else if (Broodwar->self()->getRace() == Races::Protoss) {
+			m_workerType = Protoss_Probe;
+		}
+		else if (Broodwar->self()->getRace() == Races::Terran) {
+			m_workerType = Terran_SCV;
+		}
 	}
 
 
@@ -48,7 +60,7 @@ namespace Amorphis {
 				aUnit = new AUnit(unit);
 			}
 			m_allUnits.insert(aUnit);
-			(*m_unitSets[UnitTypes::None].begin())->addUnit(aUnit);
+			(*m_unitSets[None].begin())->addUnit(aUnit);
 		}
 	}
 
@@ -121,26 +133,39 @@ namespace Amorphis {
 				it++;
 			}
 
-			vector<AUnit*> workersToMove;
-			for (auto it = (*m_unitSets[UnitTypes::None].begin())->units().begin(); it != (*m_unitSets[UnitTypes::None].begin())->units().end(); it++) {
-				if ((*it)->getType().isWorker() && m_unitSets.count((*it)->getType()) > 0 && m_unitSets[(*it)->getType()].size() > 0) {
-					if (m_unitSets[(*it)->getType()].size() != 1) {
-						AERR("m_unitSets[(*it)->getType()].size() != 1 for workers");
-					}
-					workersToMove.push_back(*it);
-				}
-			}
-			for (int i = 0; i < (int)workersToMove.size(); i++) {
-				moveUnit(*m_unitSets[UnitTypes::None].begin(), *m_unitSets[workersToMove[i]->getType()].begin(), workersToMove[i]);
+			UnitSetUnitPair workerToMove = getAvailableUnit(m_workerType, None, "None");
+			if (workerToMove.first != NULL && m_unitSets.count(m_workerType)>0 && m_unitSets[m_workerType].size() > 0) {
+				moveUnit(workerToMove, *m_unitSets[m_workerType].begin());
 			}
 		}
 	}
 
 
-	void UnitsManager::moveUnit(AUnitSet* s, AUnitSet* d, AUnit* u) const
+	UnitSetUnitPair UnitsManager::getAvailableUnit(BWAPI::UnitType unitType, BWAPI::UnitType setType, const std::string &setName)
 	{
-		s->removeUnit(u);
-		d->addUnit(u);
+		if (m_unitSets.count(setType) == 0 || m_unitSets[setType].size() == 0) {
+			return UnitSetUnitPair(NULL, NULL);
+		}
+		for (auto itUnitSet = m_unitSets[setType].begin(); itUnitSet != m_unitSets[setType].end(); itUnitSet++) {
+			if ((*itUnitSet)->name() == setName) {
+				for (auto itUnit = (*itUnitSet)->units().begin(); itUnit != (*itUnitSet)->units().end(); itUnit++) {
+					if ((*itUnit)->getType() == unitType) {
+						return UnitSetUnitPair(*itUnitSet,*itUnit);
+					}
+				}
+			}
+		}
+		return UnitSetUnitPair(NULL,NULL);
+	}
+
+
+	void UnitsManager::moveUnit(UnitSetUnitPair s, AUnitSet* d) const
+	{
+		s.first->removeUnit(s.second);
+		d->addUnit(s.second);
+		if (LogSettings::LogUnitSetMove) {
+			ALOG(string("Moving ") + s.second->getType().c_str() + string(" from ") + s.first->name() + string("(") + to_string(s.first->size()) + string(") to ") + d->name() + string("(") + to_string(d->size()) + string(")"));
+		}
 	}
 
 

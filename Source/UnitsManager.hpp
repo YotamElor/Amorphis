@@ -49,6 +49,8 @@ namespace Amorphis {
 	};
 
 
+	typedef std::pair<AUnitSet*, AUnit*> UnitSetUnitPair;
+
 	class UnitsManager{
 	private:
 		bool m_initialized = false;
@@ -59,6 +61,7 @@ namespace Amorphis {
 		std::map<int, int> m_knownUnitIDs;
 		void setUnitSetsDrawPosition();
 		int m_availableMinerals, m_availableGas;
+		BWAPI::UnitType m_workerType;
 	public:
 		UnitsManager() {}
 		static UnitsManager* UnitsManager::getInstance();
@@ -67,12 +70,13 @@ namespace Amorphis {
 		void removeUnit(BWAPI::Unit unit);
 		void addUnitSet(AUnitSet* unitSet);
 		void onFrame();
-		void moveUnit(AUnitSet * s, AUnitSet * d, AUnit * u) const;
+		void moveUnit(UnitSetUnitPair s, AUnitSet * d) const;
 		void draw();
 		const UnitsCounter& unitsCounter() const { return m_unitsCounter; }
 		const UnitsCounter& finishedUnitsCounter() const { return m_finishedUnitsCounter; }
 		int availableMinerals() const { return m_availableMinerals; }
 		int availableGas() const { return m_availableGas; }
+		UnitSetUnitPair getAvailableUnit(BWAPI::UnitType unitType, BWAPI::UnitType setType, const std::string &setName);
 	};
 
 

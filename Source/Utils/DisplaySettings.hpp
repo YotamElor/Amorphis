@@ -17,4 +17,10 @@ namespace Amorphis {
 	};
 
 
+	class LogSettings {
+	public:
+		static const bool LogOn = true;
+		static const bool LogUnitSetMove = LogOn && true;
+	};
+
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include <BWAPI.h>
 #include "Plan.hpp"
+#include "Scouting.hpp"
 
 
 namespace Amorphis {
@@ -10,6 +11,7 @@ namespace Amorphis {
 		PlanAction m_nextAction;
 		std::vector< std::pair<BWAPI::UnitType, int> > m_buildOrder;
 		planType m_plan, m_activePlan;
+		Scouting m_scouting;
 	public:
 		Strategy();
 		void onFrame();

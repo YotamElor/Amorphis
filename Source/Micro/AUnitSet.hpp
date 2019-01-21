@@ -16,6 +16,7 @@ namespace Amorphis {
 		Formation m_targetFormation;
 
 		virtual void onFrame_() {}
+		virtual std::string UnitSetText() const;
 
 	public:
 		static const int boxWidth = 120;
@@ -47,6 +48,7 @@ namespace Amorphis {
 		virtual void draw() const;
 		virtual void onFrame();
 		virtual void moveFormation(const Formation &f);
+		virtual void move(const BWAPI::Position &p);
 		const std::string& name() const { return m_name; }
 		const std::vector<AUnit*>& units() const { return m_units; }
 	};

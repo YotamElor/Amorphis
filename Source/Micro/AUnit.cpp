@@ -61,7 +61,6 @@ namespace Amorphis {
 	{
 		m_state = Move;
 		m_targetPosition = position;
-		m_unit->move(m_targetPosition);
 	}
 
 
@@ -99,9 +98,22 @@ namespace Amorphis {
 		return "";
 	}
 
+	void AUnit::onFrame() {
+		if (isAlive()) {
+			++m_lastCommandTimer;
+			onFrame_();
+		}
+	}
+
 
 	void AUnit::onFrame_()
 	{
+		if (m_state == Move) {
+			if (!m_unit->isMoving() || m_unit->getLastCommand().type != UnitCommandTypes::Move || m_unit->getLastCommand().getTargetPosition() != m_targetPosition || doRepeatCommandAndZeroCounter()) {
+				m_unit->move(m_targetPosition);
+			}
+		}
 	}
+
 
 }

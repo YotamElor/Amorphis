@@ -45,12 +45,18 @@ namespace Amorphis {
 	}
 
 
+	std::string AUnitSet::UnitSetText() const
+	{
+		return m_name + string(" : ") + string(m_type.c_str()) + string(" (") + to_string(m_units.size()) + string(")");
+
+	}
+
 	void AUnitSet::draw() const
 	{
 		if (DisplaySettings::AUnitSetBox) {
 			Broodwar->drawBoxScreen(m_drawPositionTL, m_drawPositionBR, Color(50, 50, 50), true);
 			Broodwar->drawBoxScreen(m_drawPositionTL, m_drawPositionBR, Color(200, 200, 200), false);
-			Broodwar->drawTextScreen(m_textPosition, "%s : %s (%d)", m_name.c_str(), m_type.c_str(), m_units.size());
+			Broodwar->drawTextScreen(m_textPosition, UnitSetText().c_str());
 		}
 	}
 
@@ -77,6 +83,9 @@ namespace Amorphis {
 	{
 		removeDead();
 		onFrame_();
+		for (AUnit *unit : m_units) {
+			unit->onFrame();
+		}
 	}
 
 
@@ -104,6 +113,13 @@ namespace Amorphis {
 		case Gather: return "(G)"; break;
 		}
 		return "Error convert state to string";
+	}
+
+
+	void AUnitSet::move(const BWAPI::Position &p) {
+		for (auto it : m_units) {
+			it->move(p);
+		}
 	}
 
 

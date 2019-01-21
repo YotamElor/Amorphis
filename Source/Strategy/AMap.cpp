@@ -70,10 +70,6 @@ namespace Amorphis {
 					Broodwar->drawLineMap(Position(cp->Pos(ChokePoint::middle)), Position(cp->Pos(end)), Color(50, 50, 200));
 				}
 			}
-			for (auto t : m_mainBaseArea->tiles()) {
-				Broodwar->drawBoxMap(t.position(), t.position() + Position(32, 32), Color(10, 100, 10));
-			}
-			//Broodwar->drawBoxMap(Position(nextExpansionPosition()), Position(nextExpansionPosition()) + Position(100, 100), Color(150, 150, 150));
 		}
 	}
 

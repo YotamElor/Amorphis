@@ -110,6 +110,9 @@
     <ClCompile Include="Source\Strategy\Scouting.cpp">
       <Filter>Strategy</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Micro\OverlordUnitSet.cpp">
+      <Filter>Micro</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\UnitsManager.hpp" />
@@ -225,6 +228,9 @@
     </ClInclude>
     <ClInclude Include="Source\Strategy\Scouting.hpp">
       <Filter>Strategy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Micro\OverlordUnitSet.hpp">
+      <Filter>Micro</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

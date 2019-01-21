@@ -57,9 +57,6 @@ namespace Amorphis {
 				}
 			}
 		}
-		for (AUnit *unit : m_units) {
-			unit->onFrame();
-		}
 	}
 
 

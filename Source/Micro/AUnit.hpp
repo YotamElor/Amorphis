@@ -18,6 +18,7 @@ namespace Amorphis {
 		BWAPI::Position m_targetPosition;
 		BWAPI::UnitType m_targetUnitType;
 		BWAPI::TilePosition m_targetTilePosition;
+		int m_lastCommandTimer;
 
 		AUnitSet const* m_unitSet = NULL;
 		int m_mineralDebt, m_gasDebt;
@@ -26,6 +27,7 @@ namespace Amorphis {
 		virtual void displayTarget() const;
 
 		virtual void onFrame_();
+		inline bool doRepeatCommandAndZeroCounter() { if (m_lastCommandTimer > 21) { m_lastCommandTimer = 0; return true; } return false;	}
 
 	public:
 		enum State {
@@ -41,7 +43,7 @@ namespace Amorphis {
 		AUnit(BWAPI::Unit unit) : m_unit(unit), m_mineralDebt(0), m_gasDebt(0) {}
 		const BWAPI::Unit unit() const { return m_unit; }
 		bool isAlive() const { return m_unit->exists(); }
-		void onFrame() { if (isAlive()) onFrame_(); }
+		void onFrame();
 
 		State state() const { return m_state; }
 		AUnitSet const* unitSet() const { return m_unitSet; }

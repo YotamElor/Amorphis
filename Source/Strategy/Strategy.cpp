@@ -22,6 +22,7 @@ namespace Amorphis {
 	void Strategy::init()
 	{
 		MAP->init();
+		m_scouting.init();
 		{
 			PlanItem planItem;
 			planItem.trigger.unitsHaveLessThan(Zerg_Drone, 9);
@@ -94,6 +95,7 @@ namespace Amorphis {
 
 	void Strategy::onFrame()
 	{
+		m_scouting.onFrame();
 		m_nextAction = PlanAction();
 		bool readMoreOfPlan = true;
 		if (!m_activePlan.empty()) {
