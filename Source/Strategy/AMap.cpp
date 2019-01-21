@@ -21,12 +21,24 @@ namespace Amorphis {
 
 	void AMap::init()
 	{
-		m_mainBaseArea = theMap.GetArea(Broodwar->self()->getStartLocation());
-		if (m_mainBaseArea->AccessibleNeighbours().size() != 1) {
+		for (const Area &area : theMap.Areas()) {
+			m_areas[area.Id()] = AArea(&area);
+		}
+		for (int y = 0; y < theMap.Size().y; ++y) {
+			for (int x = 0; x < theMap.Size().x; ++x) {
+				const TilePosition t(x, y);
+				if (theMap.GetArea(t) != NULL) {
+					m_areas[theMap.GetArea(t)->Id()].addTile(t);
+				}
+			}
+		}
+
+		m_mainBaseArea = &m_areas[theMap.GetArea(Broodwar->self()->getStartLocation())->Id()];
+		if (m_mainBaseArea->bwem()->AccessibleNeighbours().size() != 1) {
 			AERR("m_mainBaseArea->AccessibleNeighbours().size() != 1");
 		}
-		m_naturalArea = theMap.GetArea(m_mainBaseArea->AccessibleNeighbours()[0]->Id());
-		if (m_naturalArea->Bases().size() != 1) {
+		m_naturalArea = &m_areas[m_mainBaseArea->bwem()->AccessibleNeighbours()[0]->Id()];
+		if (m_naturalArea->bwem()->Bases().size() != 1) {
 			AERR("m_naturalArea->Bases().size() != 1");
 		}
 	}
@@ -40,15 +52,18 @@ namespace Amorphis {
 	void AMap::draw() const
 	{
 		if (DisplaySettings::Map) {
-			for (const ChokePoint * cp : m_naturalArea->ChokePoints()) {
+			for (const ChokePoint * cp : m_naturalArea->bwem()->ChokePoints()) {
 				for (ChokePoint::node end : {ChokePoint::end1, ChokePoint::end2}) {
 					Broodwar->drawLineMap(Position(cp->Pos(ChokePoint::middle)), Position(cp->Pos(end)), Color(200, 50, 50));
 				}
 			}
-			for (const ChokePoint * cp : m_mainBaseArea->ChokePoints()) {
+			for (const ChokePoint * cp : m_mainBaseArea->bwem()->ChokePoints()) {
 				for (ChokePoint::node end : {ChokePoint::end1, ChokePoint::end2}) {
 					Broodwar->drawLineMap(Position(cp->Pos(ChokePoint::middle)), Position(cp->Pos(end)), Color(50, 50, 200));
 				}
+			}
+			for (auto t : m_mainBaseArea->tiles()) {
+				Broodwar->drawBoxMap(t.position(), t.position() + Position(32, 32), Color(10, 100, 10));
 			}
 			//Broodwar->drawBoxMap(Position(nextExpansionPosition()), Position(nextExpansionPosition()) + Position(100, 100), Color(150, 150, 150));
 		}
@@ -57,7 +72,7 @@ namespace Amorphis {
 
 	BWAPI::TilePosition AMap::nextExpansionPosition() const
 	{
-		return m_naturalArea->Bases()[0].Location();
+		return m_naturalArea->bwem()->Bases()[0].Location();
 
 	}
 

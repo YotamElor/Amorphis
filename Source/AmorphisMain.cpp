@@ -13,6 +13,7 @@ namespace Amorphis {
 
 	void AmorphisMain::init()
 	{
+		//Broodwar->sendText("black sheep wall");
 		UM->init();
 		for (const BWAPI::Unit &unit : Broodwar->self()->getUnits()) {
 			if (unit->getType().isResourceDepot()) {

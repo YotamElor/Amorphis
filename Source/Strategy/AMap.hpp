@@ -3,15 +3,16 @@
 #include "Plan.hpp"
 
 #include "bwem/map.h"
-#include "bwem/area.h"
+#include "AArea.hpp"
 
 
 namespace Amorphis {
 
 
 	class AMap {
-		BWEM::Area const *m_mainBaseArea = NULL;
-		BWEM::Area const *m_naturalArea = NULL;
+		AArea const *m_mainBaseArea = NULL;
+		AArea const *m_naturalArea = NULL;
+		std::map<int, AArea> m_areas;
 	public:
 
 		AMap();

@@ -121,7 +121,9 @@
     <ClCompile Include="Source\Micro\RangedUnitSet.cpp" />
     <ClCompile Include="Source\Micro\WorkerUnit.cpp" />
     <ClCompile Include="Source\Micro\WorkerUnitSet.cpp" />
+    <ClCompile Include="Source\Strategy\AArea.cpp" />
     <ClCompile Include="Source\Strategy\AMap.cpp" />
+    <ClCompile Include="Source\Strategy\ATile.cpp" />
     <ClCompile Include="Source\Strategy\Plan.cpp" />
     <ClCompile Include="Source\Strategy\Strategy.cpp" />
     <ClCompile Include="Source\UnitsManager.cpp" />
@@ -159,7 +161,9 @@
     <ClInclude Include="Source\Micro\RangedUnitSet.hpp" />
     <ClInclude Include="Source\Micro\WorkerUnit.hpp" />
     <ClInclude Include="Source\Micro\WorkerUnitSet.hpp" />
+    <ClInclude Include="Source\Strategy\AArea.hpp" />
     <ClInclude Include="Source\Strategy\AMap.hpp" />
+    <ClInclude Include="Source\Strategy\ATile.hpp" />
     <ClInclude Include="Source\Strategy\Plan.hpp" />
     <ClInclude Include="Source\Strategy\Strategy.hpp" />
     <ClInclude Include="Source\UnitsManager.hpp" />
