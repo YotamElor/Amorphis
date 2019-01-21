@@ -2,6 +2,7 @@
 #include "Utils/DisplaySettings.hpp"
 #include "Utils/Logger.hpp"
 #include "UnitsManager.hpp"
+#include "AMap.hpp"
 
 
 using namespace BWAPI;
@@ -20,7 +21,7 @@ namespace Amorphis {
 
 	void Strategy::init()
 	{
-		m_map.init();
+		MAP->init();
 		{
 			PlanItem planItem;
 			planItem.trigger.unitsHaveLessThan(Zerg_Drone, 9);
@@ -41,14 +42,14 @@ namespace Amorphis {
 		}
 		{
 			PlanItem planItem;
-			planItem.trigger.unitsHaveLessThan(Zerg_Drone, 9);
+			planItem.trigger.unitsHaveLessThan(Zerg_Drone, 11);
 			planItem.action.buildUnit(Zerg_Drone);
 			m_plan.push_back(planItem);
 		}
 		{
 			PlanItem planItem;
 			planItem.trigger.unitsHaveLessThan(Zerg_Hatchery, 2);
-			planItem.action.buildBuilding(Zerg_Hatchery, m_map.nextExpansionPosition());
+			planItem.action.buildBuilding(Zerg_Hatchery, MAP->nextExpansionPosition());
 			m_plan.push_back(planItem);
 		}
 		return;
@@ -138,7 +139,7 @@ namespace Amorphis {
 			}
 			Broodwar->drawTextScreen(Position(120, 20), s.c_str());
 		}
-		m_map.draw();
+		MAP->draw();
 	}
 
 

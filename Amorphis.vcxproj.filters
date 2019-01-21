@@ -107,6 +107,9 @@
     <ClCompile Include="Source\Strategy\ATile.cpp">
       <Filter>Strategy</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Strategy\Scouting.cpp">
+      <Filter>Strategy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\UnitsManager.hpp" />
@@ -218,6 +221,9 @@
       <Filter>Strategy</Filter>
     </ClInclude>
     <ClInclude Include="Source\Strategy\ATile.hpp">
+      <Filter>Strategy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Strategy\Scouting.hpp">
       <Filter>Strategy</Filter>
     </ClInclude>
   </ItemGroup>

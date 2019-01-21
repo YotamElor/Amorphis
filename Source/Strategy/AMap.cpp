@@ -3,6 +3,7 @@
 #include "Utils/Logger.hpp"
 #include "UnitsManager.hpp"
 #include "bwem/base.h"
+#include "AMap.hpp"
 
 
 using namespace BWAPI;
@@ -14,8 +15,15 @@ namespace { auto & theMap = BWEM::Map::Instance(); }
 namespace Amorphis {
 
 
-	AMap::AMap()
+	AMap* AMap::m_instance = NULL;
+
+
+	AMap* AMap::getInstance()
 	{
+		if (m_instance == NULL) {
+			m_instance = new AMap();
+		}
+		return m_instance;
 	}
 
 
