@@ -27,7 +27,7 @@ namespace Amorphis {
 		virtual void displayTarget() const;
 
 		virtual void onFrame_();
-		inline bool doRepeatCommandAndZeroCounter() { if (m_lastCommandTimer > 21) { m_lastCommandTimer = 0; return true; } return false;	}
+		inline bool doRepeatCommandAndZeroCounter() { ++m_lastCommandTimer; if (m_lastCommandTimer > 21) { m_lastCommandTimer = 0; return true; } return false;	}
 
 	public:
 		enum State {

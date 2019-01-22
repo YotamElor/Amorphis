@@ -12,6 +12,10 @@ namespace Amorphis {
 		std::vector< std::pair<BWAPI::UnitType, int> > m_buildOrder;
 		planType m_plan, m_activePlan;
 		Scouting m_scouting;
+
+		int startCountFrame = 0;
+		int startCountMinerals = 0;
+
 	public:
 		Strategy();
 		void onFrame();

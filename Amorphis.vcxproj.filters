@@ -113,6 +113,12 @@
     <ClCompile Include="Source\Micro\OverlordUnitSet.cpp">
       <Filter>Micro</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Strategy\EnemyBuilding.cpp">
+      <Filter>Strategy</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Strategy\MiningRate.cpp">
+      <Filter>Strategy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\UnitsManager.hpp" />
@@ -231,6 +237,12 @@
     </ClInclude>
     <ClInclude Include="Source\Micro\OverlordUnitSet.hpp">
       <Filter>Micro</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Strategy\EnemyBuilding.hpp">
+      <Filter>Strategy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Strategy\MiningRate.hpp">
+      <Filter>Strategy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

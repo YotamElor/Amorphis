@@ -100,7 +100,6 @@ namespace Amorphis {
 
 	void AUnit::onFrame() {
 		if (isAlive()) {
-			++m_lastCommandTimer;
 			onFrame_();
 		}
 	}

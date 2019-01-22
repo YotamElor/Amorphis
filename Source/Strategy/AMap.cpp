@@ -42,12 +42,14 @@ namespace Amorphis {
 		}
 
 		m_mainBaseArea = &m_areas[theMap.GetArea(Broodwar->self()->getStartLocation())->Id()];
-		if (m_mainBaseArea->bwem()->AccessibleNeighbours().size() != 1) {
-			AERR("m_mainBaseArea->AccessibleNeighbours().size() != 1");
+		
+		for (BWEM::Area const* a : m_mainBaseArea->bwem()->AccessibleNeighbours()) {
+			if (!a->Bases().empty()) {
+				m_naturalArea = &m_areas[a->Id()];
+			}
 		}
-		m_naturalArea = &m_areas[m_mainBaseArea->bwem()->AccessibleNeighbours()[0]->Id()];
-		if (m_naturalArea->bwem()->Bases().size() != 1) {
-			AERR("m_naturalArea->Bases().size() != 1");
+		if (m_naturalArea == NULL) {
+			AERR("m_naturalArea == NULL");
 		}
 	}
 

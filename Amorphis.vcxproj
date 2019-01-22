@@ -125,6 +125,8 @@
     <ClCompile Include="Source\Strategy\AArea.cpp" />
     <ClCompile Include="Source\Strategy\AMap.cpp" />
     <ClCompile Include="Source\Strategy\ATile.cpp" />
+    <ClCompile Include="Source\Strategy\EnemyBuilding.cpp" />
+    <ClCompile Include="Source\Strategy\MiningRate.cpp" />
     <ClCompile Include="Source\Strategy\Plan.cpp" />
     <ClCompile Include="Source\Strategy\Scouting.cpp" />
     <ClCompile Include="Source\Strategy\Strategy.cpp" />
@@ -167,6 +169,8 @@
     <ClInclude Include="Source\Strategy\AArea.hpp" />
     <ClInclude Include="Source\Strategy\AMap.hpp" />
     <ClInclude Include="Source\Strategy\ATile.hpp" />
+    <ClInclude Include="Source\Strategy\EnemyBuilding.hpp" />
+    <ClInclude Include="Source\Strategy\MiningRate.hpp" />
     <ClInclude Include="Source\Strategy\Plan.hpp" />
     <ClInclude Include="Source\Strategy\Scouting.hpp" />
     <ClInclude Include="Source\Strategy\Strategy.hpp" />

@@ -3,6 +3,7 @@
 #include "Utils/Logger.hpp"
 #include "UnitsManager.hpp"
 #include "AMap.hpp"
+#include "MiningRate.hpp"
 
 
 using namespace BWAPI;
@@ -21,6 +22,7 @@ namespace Amorphis {
 
 	void Strategy::init()
 	{
+		Broodwar->sendText("power overwhelming");
 		MAP->init();
 		m_scouting.init();
 		{
@@ -97,6 +99,29 @@ namespace Amorphis {
 	{
 		m_scouting.onFrame();
 		m_nextAction = PlanAction();
+		const int droneTargetCount = 23;
+		const int numPatches = 9;
+		if (UM->unitsCounter().getCounter(Zerg_Overlord) < 4) {
+			m_nextAction.buildUnit(Zerg_Overlord);
+		}
+		else if (UM->unitsCounter().getCounter(Zerg_Drone) < droneTargetCount) {
+			m_nextAction.buildUnit(Zerg_Drone);
+		}
+		if (UM->finishedUnitsCounter().getCounter(Zerg_Drone) == droneTargetCount) {
+			if (startCountFrame == 0) {
+				startCountFrame = Broodwar->getFrameCount();
+				startCountMinerals = Broodwar->self()->minerals();
+			}
+			else if (Broodwar->getFrameCount() % 1000 == 0) {
+				int frameDiff = Broodwar->getFrameCount() - startCountFrame;
+				int mineralsDiff = Broodwar->self()->minerals() - startCountMinerals;
+				double miningRate = (double)mineralsDiff / (double)frameDiff;
+				double ratePred = calcMiningRate(numPatches, droneTargetCount);
+				Broodwar->sendText("%d : rate = %f calc = %f diff = %d%%", droneTargetCount, miningRate, ratePred, (int)((miningRate / ratePred - 1.)*100.));
+			}
+		}
+		return;
+
 		bool readMoreOfPlan = true;
 		if (!m_activePlan.empty()) {
 			for (int i = 0; i < (int)m_activePlan.size(); i++) {
