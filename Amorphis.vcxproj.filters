@@ -116,8 +116,17 @@
     <ClCompile Include="Source\Strategy\EnemyBuilding.cpp">
       <Filter>Strategy</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Strategy\MiningRate.cpp">
-      <Filter>Strategy</Filter>
+    <ClCompile Include="Source\BuildOptimizer\BuildOptimizer.cpp">
+      <Filter>BuildOptimizer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BuildOptimizer\MiningRate.cpp">
+      <Filter>BuildOptimizer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BuildOptimizer\Action.cpp">
+      <Filter>BuildOptimizer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BuildOptimizer\State.cpp">
+      <Filter>BuildOptimizer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -241,8 +250,17 @@
     <ClInclude Include="Source\Strategy\EnemyBuilding.hpp">
       <Filter>Strategy</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Strategy\MiningRate.hpp">
-      <Filter>Strategy</Filter>
+    <ClInclude Include="Source\BuildOptimizer\BuildOptimizer.hpp">
+      <Filter>BuildOptimizer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BuildOptimizer\MiningRate.hpp">
+      <Filter>BuildOptimizer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BuildOptimizer\Action.hpp">
+      <Filter>BuildOptimizer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BuildOptimizer\State.hpp">
+      <Filter>BuildOptimizer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -261,5 +279,11 @@
     <Filter Include="Strategy">
       <UniqueIdentifier>{8474b86d-4706-47fd-ada4-6cdce008da75}</UniqueIdentifier>
     </Filter>
+    <Filter Include="BuildOptimizer">
+      <UniqueIdentifier>{932278d9-06ac-40a8-ba49-879f5f569d5e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

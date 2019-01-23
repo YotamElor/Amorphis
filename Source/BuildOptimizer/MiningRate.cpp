@@ -2,9 +2,12 @@
 #include "Utils/Logger.hpp"
 
 
-namespace Amorphis {
+using namespace Amorphis;
 
 
+namespace BuildOptimizerNamespace {
+
+	
 	double calcMiningRate(int numPatches, int numWorkers) {
 		const double MiningRate[4] = { 0, 0.0465, 2.*0.0435, 0.1 };
 		if (numWorkers >= 3 * numPatches) {

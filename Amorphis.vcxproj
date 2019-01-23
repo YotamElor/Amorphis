@@ -92,6 +92,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\AmorphisMain.cpp" />
+    <ClCompile Include="Source\BuildOptimizer\Action.cpp" />
+    <ClCompile Include="Source\BuildOptimizer\BuildOptimizer.cpp" />
+    <ClCompile Include="Source\BuildOptimizer\MiningRate.cpp" />
+    <ClCompile Include="Source\BuildOptimizer\State.cpp" />
     <ClCompile Include="Source\bwem\area.cpp" />
     <ClCompile Include="Source\bwem\base.cpp" />
     <ClCompile Include="Source\bwem\bwapiExt.cpp" />
@@ -126,7 +130,6 @@
     <ClCompile Include="Source\Strategy\AMap.cpp" />
     <ClCompile Include="Source\Strategy\ATile.cpp" />
     <ClCompile Include="Source\Strategy\EnemyBuilding.cpp" />
-    <ClCompile Include="Source\Strategy\MiningRate.cpp" />
     <ClCompile Include="Source\Strategy\Plan.cpp" />
     <ClCompile Include="Source\Strategy\Scouting.cpp" />
     <ClCompile Include="Source\Strategy\Strategy.cpp" />
@@ -137,6 +140,10 @@
   <ItemGroup>
     <ClInclude Include="Source\AmorphisMain.hpp" />
     <ClInclude Include="Source\AmorphisAIModule.h" />
+    <ClInclude Include="Source\BuildOptimizer\Action.hpp" />
+    <ClInclude Include="Source\BuildOptimizer\BuildOptimizer.hpp" />
+    <ClInclude Include="Source\BuildOptimizer\MiningRate.hpp" />
+    <ClInclude Include="Source\BuildOptimizer\State.hpp" />
     <ClInclude Include="Source\bwem\area.h" />
     <ClInclude Include="Source\bwem\base.h" />
     <ClInclude Include="Source\bwem\bwapiExt.h" />
@@ -170,7 +177,6 @@
     <ClInclude Include="Source\Strategy\AMap.hpp" />
     <ClInclude Include="Source\Strategy\ATile.hpp" />
     <ClInclude Include="Source\Strategy\EnemyBuilding.hpp" />
-    <ClInclude Include="Source\Strategy\MiningRate.hpp" />
     <ClInclude Include="Source\Strategy\Plan.hpp" />
     <ClInclude Include="Source\Strategy\Scouting.hpp" />
     <ClInclude Include="Source\Strategy\Strategy.hpp" />
@@ -178,6 +184,9 @@
     <ClInclude Include="Source\Utils\DisplaySettings.hpp" />
     <ClInclude Include="Source\Utils\Geometry.hpp" />
     <ClInclude Include="Source\Utils\Logger.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

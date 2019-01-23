@@ -1,7 +1,7 @@
 #pragma once
 
 
-namespace Amorphis {
+namespace BuildOptimizerNamespace {
 
 
 	double calcMiningRate(int numPatches, int numWorkers);

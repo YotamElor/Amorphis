@@ -20,9 +20,9 @@ namespace Amorphis {
 	};
 
 
-#define ALOG(X) Logger::getInstance()->log(X)
-#define AWARN(X) Logger::getInstance()->warn(X)
-#define AERR(X) Logger::getInstance()->err(X)
+#define ALOG(X) Amorphis::Logger::getInstance()->log(X)
+#define AWARN(X) Amorphis::Logger::getInstance()->warn(X)
+#define AERR(X) Amorphis::Logger::getInstance()->err(X)
 
 
 }

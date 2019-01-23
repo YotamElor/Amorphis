@@ -3,7 +3,8 @@
 #include "Utils/Logger.hpp"
 #include "UnitsManager.hpp"
 #include "AMap.hpp"
-#include "MiningRate.hpp"
+#include "BuildOptimizer/MiningRate.hpp"
+#include "BuildOptimizer/BuildOptimizer.hpp"
 
 
 using namespace BWAPI;
@@ -22,6 +23,10 @@ namespace Amorphis {
 
 	void Strategy::init()
 	{
+		{
+			BuildOptimizerNamespace::BuildOptimizer buildOptimizer;
+		}
+		AERR("done");
 		Broodwar->sendText("power overwhelming");
 		MAP->init();
 		m_scouting.init();
@@ -116,8 +121,8 @@ namespace Amorphis {
 				int frameDiff = Broodwar->getFrameCount() - startCountFrame;
 				int mineralsDiff = Broodwar->self()->minerals() - startCountMinerals;
 				double miningRate = (double)mineralsDiff / (double)frameDiff;
-				double ratePred = calcMiningRate(numPatches, droneTargetCount);
-				Broodwar->sendText("%d : rate = %f calc = %f diff = %d%%", droneTargetCount, miningRate, ratePred, (int)((miningRate / ratePred - 1.)*100.));
+//				double ratePred = BuildOptimizerNamespace::calcMiningRate(numPatches, droneTargetCount);
+//				Broodwar->sendText("%d : rate = %f calc = %f diff = %d%%", droneTargetCount, miningRate, ratePred, (int)((miningRate / ratePred - 1.)*100.));
 			}
 		}
 		return;
