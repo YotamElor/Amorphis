@@ -1,32 +1,23 @@
 #pragma once
-#include <BWAPI.h>
-#include <set>
-
+#include "Resource.hpp"
 
 namespace BuildOptimizerNamespace {
 
-	
-	class Resource {
-	public:
-		enum ResourceType {unit=0, minerals=1, gas=2};
-	private:
-		ResourceType m_type;
-		BWAPI::UnitType m_unitType = BWAPI::UnitTypes::None;
-		int m_amount;
-	public:
-		Resource(BWAPI::UnitType unitType, int amount) : m_type(unit), m_unitType(unitType), m_amount(amount) {}
-		Resource(ResourceType type, int amount) : m_type(type), m_amount(amount) {}
-		ResourceType type() const { return m_type; }
-		int amount() const { return m_amount; }
-		BWAPI::UnitType unitType() const { return m_unitType; }
-	};
-
 
 	class Action {
+		Resource m_produce;
+		ResourceSet m_required, m_borrowed, m_consumed;
+		int m_mineralsConsumed, m_gasConsumed, m_supplyConsumed;
 	public:
-		int duration;
-		std::set<Resource> required, borrowed, consumed;
-		Resource produce;
+		std::string toString() const;
+		Action(BWAPI::UnitType type);
+		const Resource& getProduce() const { return m_produce; }
+		const ResourceSet& getRequired() const { return m_required; }
+		const ResourceSet& getBorrowed() const { return m_borrowed; }
+		const ResourceSet& getConsumed() const { return m_consumed; }
+		int mineralsConsumed() const { return m_mineralsConsumed; }
+		int gasConsumed() const { return m_gasConsumed; }
+		int supplyConsumed() const { return m_supplyConsumed; }
 	};
 
 

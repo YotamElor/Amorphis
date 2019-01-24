@@ -80,7 +80,7 @@ namespace Amorphis {
 	};
 
 
-	#define UM UnitsManager::getInstance()
+	#define UM Amorphis::UnitsManager::getInstance()
 
 
 }

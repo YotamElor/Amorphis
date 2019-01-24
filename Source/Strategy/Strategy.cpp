@@ -3,7 +3,6 @@
 #include "Utils/Logger.hpp"
 #include "UnitsManager.hpp"
 #include "AMap.hpp"
-#include "BuildOptimizer/MiningRate.hpp"
 #include "BuildOptimizer/BuildOptimizer.hpp"
 
 
@@ -23,10 +22,6 @@ namespace Amorphis {
 
 	void Strategy::init()
 	{
-		{
-			BuildOptimizerNamespace::BuildOptimizer buildOptimizer;
-		}
-		AERR("done");
 		Broodwar->sendText("power overwhelming");
 		MAP->init();
 		m_scouting.init();
@@ -102,6 +97,11 @@ namespace Amorphis {
 
 	void Strategy::onFrame()
 	{
+		{
+			BuildOptimizerNamespace::BuildOptimizer buildOptimizer;
+		}
+		AERR("done");
+
 		m_scouting.onFrame();
 		m_nextAction = PlanAction();
 		const int droneTargetCount = 23;

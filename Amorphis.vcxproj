@@ -94,7 +94,7 @@
     <ClCompile Include="Source\AmorphisMain.cpp" />
     <ClCompile Include="Source\BuildOptimizer\Action.cpp" />
     <ClCompile Include="Source\BuildOptimizer\BuildOptimizer.cpp" />
-    <ClCompile Include="Source\BuildOptimizer\MiningRate.cpp" />
+    <ClCompile Include="Source\BuildOptimizer\Resource.cpp" />
     <ClCompile Include="Source\BuildOptimizer\State.cpp" />
     <ClCompile Include="Source\bwem\area.cpp" />
     <ClCompile Include="Source\bwem\base.cpp" />
@@ -142,7 +142,7 @@
     <ClInclude Include="Source\AmorphisAIModule.h" />
     <ClInclude Include="Source\BuildOptimizer\Action.hpp" />
     <ClInclude Include="Source\BuildOptimizer\BuildOptimizer.hpp" />
-    <ClInclude Include="Source\BuildOptimizer\MiningRate.hpp" />
+    <ClInclude Include="Source\BuildOptimizer\Resource.hpp" />
     <ClInclude Include="Source\BuildOptimizer\State.hpp" />
     <ClInclude Include="Source\bwem\area.h" />
     <ClInclude Include="Source\bwem\base.h" />

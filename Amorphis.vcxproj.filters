@@ -119,13 +119,13 @@
     <ClCompile Include="Source\BuildOptimizer\BuildOptimizer.cpp">
       <Filter>BuildOptimizer</Filter>
     </ClCompile>
-    <ClCompile Include="Source\BuildOptimizer\MiningRate.cpp">
-      <Filter>BuildOptimizer</Filter>
-    </ClCompile>
     <ClCompile Include="Source\BuildOptimizer\Action.cpp">
       <Filter>BuildOptimizer</Filter>
     </ClCompile>
     <ClCompile Include="Source\BuildOptimizer\State.cpp">
+      <Filter>BuildOptimizer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BuildOptimizer\Resource.cpp">
       <Filter>BuildOptimizer</Filter>
     </ClCompile>
   </ItemGroup>
@@ -253,13 +253,13 @@
     <ClInclude Include="Source\BuildOptimizer\BuildOptimizer.hpp">
       <Filter>BuildOptimizer</Filter>
     </ClInclude>
-    <ClInclude Include="Source\BuildOptimizer\MiningRate.hpp">
-      <Filter>BuildOptimizer</Filter>
-    </ClInclude>
     <ClInclude Include="Source\BuildOptimizer\Action.hpp">
       <Filter>BuildOptimizer</Filter>
     </ClInclude>
     <ClInclude Include="Source\BuildOptimizer\State.hpp">
+      <Filter>BuildOptimizer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BuildOptimizer\Resource.hpp">
       <Filter>BuildOptimizer</Filter>
     </ClInclude>
   </ItemGroup>
